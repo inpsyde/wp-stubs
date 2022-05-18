@@ -1,0 +1,7 @@
+/vendor/
+/archives/*
+!/archives/.gitkeep
+/files/*
+!/files/.gitkeep
+/stubs/*
+!/stubs/*.php

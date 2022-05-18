@@ -1,0 +1,26 @@
+{
+    "name": "inpsyde/wp-stubs",
+    "description": "WordPress stubs",
+    "type": "project",
+    "require": {
+        "php": "^7.4 || ^8",
+        "php-stubs/generator": "^v0.8.1",
+        "symfony/process": "^5"
+    },
+    "autoload": {
+        "files": [
+            "inc/helpers.php",
+            "inc/zip.php",
+            "inc/wp-api.php",
+            "inc/process.php"
+        ],
+        "psr-4": {
+            "Inpsyde\\WpStubs\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "extra": {
+        "installer-disable": true
+    }
+}
