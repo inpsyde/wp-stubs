@@ -36,6 +36,7 @@ try {
     );
     $fixtures = buildFixtures(require WP_STUBS_DIR . '/fixtures.php');
     $visitor = NodeVisitor::new($fixtures);
+    $latestDone = false;
     $shortDone = [];
 
     foreach ($toDownload as [$fullVer, $shortVer, $url]) {
@@ -54,6 +55,13 @@ try {
             writeOutput($output, "{$stubsDir}/{$fullVer}.php", $fullVer)
                 ? $success++
                 : fwrite(STDERR, "\nStubs for WP '{$fullVer}' not created.");
+
+            if (!$latestDone) {
+                $latestDone = true;
+                writeOutput($output, "{$stubsDir}/latest.php", 'latest')
+                    ? $success++
+                    : fwrite(STDERR, "\nStubs for WP latest not written.");
+            }
 
             if ($shortVer === $fullVer) {
                 continue;
