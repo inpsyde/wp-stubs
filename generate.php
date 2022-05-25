@@ -58,6 +58,7 @@ try {
 
             if (!$latestDone) {
                 $latestDone = true;
+                $all++;
                 writeOutput($output, "{$stubsDir}/latest.php", 'latest')
                     ? $success++
                     : fwrite(STDERR, "\nStubs for WP latest not written.");
