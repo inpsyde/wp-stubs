@@ -3,11 +3,13 @@
     "description": "WordPress stubs",
     "type": "project",
     "require": {
-        "php": "^7.4 || ^8",
+        "php": "^7.4 || ^8"
+    },
+    "require-dev": {
         "php-stubs/generator": "^v0.8.1",
         "symfony/process": "^5"
     },
-    "autoload": {
+    "autoload-dev": {
         "files": [
             "inc/helpers.php",
             "inc/zip.php",
