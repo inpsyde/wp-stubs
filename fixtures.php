@@ -15,7 +15,7 @@ $fixtures['$global']['functions']['apply_filters'] = <<<'PHP'
  * @param string $hook_name
  * @param mixed $value
  * @param mixed ...$args
- * @return true
+ * @return mixed
  */
 function apply_filters($hook_name, $value, ...$args) {};
 PHP;
