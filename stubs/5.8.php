@@ -665,7 +665,7 @@ namespace {
          *                                               destination folder. Default false.
          *     @type bool   $clear_working               Whether to delete the files from the working
          *                                               directory after copying them to the destination.
-         *                                               Default false.
+         *                                               Default true.
          *     @type bool   $abort_if_destination_exists Whether to abort the installation if the destination
          *                                               folder already exists. When true, `$clear_destination`
          *                                               should be false. Default true.
@@ -1195,7 +1195,7 @@ namespace {
          *
          * @param string $cropped              Cropped image URL.
          * @param int    $parent_attachment_id Attachment ID of parent image.
-         * @return array Attachment object.
+         * @return array An array with attachment object data.
          */
         public final function create_attachment_object($cropped, $parent_attachment_id)
         {
@@ -1205,11 +1205,11 @@ namespace {
          *
          * @since 3.9.0
          *
-         * @param array  $object  Attachment object.
-         * @param string $cropped File path to cropped image.
+         * @param array  $attachment An array with attachment object data.
+         * @param string $cropped    File path to cropped image.
          * @return int Attachment ID.
          */
-        public final function insert_attachment($object, $cropped)
+        public final function insert_attachment($attachment, $cropped)
         {
         }
         /**
@@ -1235,7 +1235,7 @@ namespace {
         }
         /**
          * Given an attachment ID for a header image, unsets it as a user-uploaded
-         * header image for the current theme.
+         * header image for the active theme.
          *
          * Triggered when the user clicks the overlay "X" button next to each image
          * choice in the Customizer's Header tool.
@@ -1280,10 +1280,10 @@ namespace {
          *
          * @since 4.9.0
          *
-         * @param array $object A crop attachment object.
+         * @param array $attachment An array with a cropped attachment object data.
          * @return int|false An attachment ID if one exists. False if none.
          */
-        public function get_previous_crop($object)
+        public function get_previous_crop($attachment)
         {
         }
     }
@@ -1517,10 +1517,10 @@ namespace {
         function glob($pattern, $handle = \NULL)
         {
         }
-        function glob_pattern_match($pattern, $string)
+        function glob_pattern_match($pattern, $subject)
         {
         }
-        function glob_regexp($pattern, $probe)
+        function glob_regexp($pattern, $subject)
         {
         }
         function dirlist($remote)
@@ -2936,11 +2936,11 @@ namespace {
          * @since 2.8.0
          * @since 4.1.0 Added a return value.
          *
-         * @param bool|WP_Error $return Upgrade offer return.
-         * @param array         $plugin Plugin package arguments.
-         * @return bool|WP_Error The passed in $return param or WP_Error.
+         * @param bool|WP_Error $response The installation response before the installation has started.
+         * @param array         $plugin   Plugin package arguments.
+         * @return bool|WP_Error The original `$response` parameter or WP_Error.
          */
-        public function deactivate_plugin_before_upgrade($return, $plugin)
+        public function deactivate_plugin_before_upgrade($response, $plugin)
         {
         }
         /**
@@ -2950,11 +2950,11 @@ namespace {
          *
          * @since 5.4.0
          *
-         * @param bool|WP_Error $return Upgrade offer return.
-         * @param array         $plugin Plugin package arguments.
-         * @return bool|WP_Error The passed in $return param or WP_Error.
+         * @param bool|WP_Error $response The installation response before the installation has started.
+         * @param array         $plugin   Plugin package arguments.
+         * @return bool|WP_Error The original `$response` parameter or WP_Error.
          */
-        public function active_before($return, $plugin)
+        public function active_before($response, $plugin)
         {
         }
         /**
@@ -2964,11 +2964,11 @@ namespace {
          *
          * @since 5.4.0
          *
-         * @param bool|WP_Error $return Upgrade offer return.
-         * @param array         $plugin Plugin package arguments.
-         * @return bool|WP_Error The passed in $return param or WP_Error.
+         * @param bool|WP_Error $response The installation response after the installation has finished.
+         * @param array         $plugin   Plugin package arguments.
+         * @return bool|WP_Error The original `$response` parameter or WP_Error.
          */
-        public function active_after($return, $plugin)
+        public function active_after($response, $plugin)
         {
         }
         /**
@@ -3267,33 +3267,33 @@ namespace {
         {
         }
         /**
-         * Turn on maintenance mode before attempting to upgrade the current theme.
+         * Turn on maintenance mode before attempting to upgrade the active theme.
          *
          * Hooked to the {@see 'upgrader_pre_install'} filter by Theme_Upgrader::upgrade() and
          * Theme_Upgrader::bulk_upgrade().
          *
          * @since 2.8.0
          *
-         * @param bool|WP_Error $return Upgrade offer return.
-         * @param array         $theme  Theme arguments.
-         * @return bool|WP_Error The passed in $return param or WP_Error.
+         * @param bool|WP_Error $response The installation response before the installation has started.
+         * @param array         $theme    Theme arguments.
+         * @return bool|WP_Error The original `$response` parameter or WP_Error.
          */
-        public function current_before($return, $theme)
+        public function current_before($response, $theme)
         {
         }
         /**
-         * Turn off maintenance mode after upgrading the current theme.
+         * Turn off maintenance mode after upgrading the active theme.
          *
          * Hooked to the {@see 'upgrader_post_install'} filter by Theme_Upgrader::upgrade()
          * and Theme_Upgrader::bulk_upgrade().
          *
          * @since 2.8.0
          *
-         * @param bool|WP_Error $return Upgrade offer return.
-         * @param array         $theme  Theme arguments.
-         * @return bool|WP_Error The passed in $return param or WP_Error.
+         * @param bool|WP_Error $response The installation response after the installation has finished.
+         * @param array         $theme    Theme arguments.
+         * @return bool|WP_Error The original `$response` parameter or WP_Error.
          */
-        public function current_after($return, $theme)
+        public function current_after($response, $theme)
         {
         }
         /**
@@ -3355,11 +3355,11 @@ namespace {
          * DB fields to use.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $db_fields;
         /**
-         * Max number of pages walked by the paged walker
+         * Max number of pages walked by the paged walker.
          *
          * @since 2.7.0
          * @var int
@@ -3407,10 +3407,10 @@ namespace {
         {
         }
         /**
-         * Start the element output.
+         * Starts the element output.
          *
          * The $args parameter holds additional values that may be used with the child
-         * class methods. Includes the element output also.
+         * class methods. Also includes the element output.
          *
          * @since 2.1.0
          * @since 5.9.0 Renamed `$object` (a PHP reserved keyword) to `$data_object` for PHP 8 named parameter support.
@@ -3443,7 +3443,7 @@ namespace {
         {
         }
         /**
-         * Traverse elements to create list from elements.
+         * Traverses elements to create list from elements.
          *
          * Display one element if the element doesn't have any children otherwise,
          * display the element and its children. Will only traverse up to the max
@@ -3465,7 +3465,7 @@ namespace {
         {
         }
         /**
-         * Display array of elements hierarchically.
+         * Displays array of elements hierarchically.
          *
          * Does not assume any existing order of elements.
          *
@@ -3486,7 +3486,7 @@ namespace {
         {
         }
         /**
-         * paged_walk() - produce a page of nested elements
+         * Produces a page of nested elements.
          *
          * Given an array of hierarchical elements, the maximum depth, a specific page number,
          * and number of elements per page, this function first determines all top level root elements
@@ -3499,12 +3499,12 @@ namespace {
          * @since 5.3.0 Formalized the existing `...$args` parameter by adding it
          *              to the function signature.
          *
-         * @param array $elements
+         * @param array $elements  An array of elements.
          * @param int   $max_depth The maximum hierarchical depth.
          * @param int   $page_num  The specific page number, beginning with 1.
-         * @param int   $per_page
+         * @param int   $per_page  Number of elements per page.
          * @param mixed ...$args   Optional additional arguments.
-         * @return string XHTML of the specified page of elements
+         * @return string XHTML of the specified page of elements.
          */
         public function paged_walk($elements, $max_depth, $page_num, $per_page, ...$args)
         {
@@ -3521,14 +3521,14 @@ namespace {
         {
         }
         /**
-         * Unset all the children for a given top level element.
+         * Unsets all the children for a given top level element.
          *
          * @since 2.7.0
          *
-         * @param object $e
-         * @param array  $children_elements
+         * @param object $element           The top level element.
+         * @param array  $children_elements The children elements.
          */
-        public function unset_children($e, &$children_elements)
+        public function unset_children($element, &$children_elements)
         {
         }
     }
@@ -3646,7 +3646,7 @@ namespace {
          *
          * @since 3.0.0
          * @todo Decouple this.
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          */
@@ -4311,11 +4311,11 @@ namespace {
          *
          * @since 3.1.0
          *
-         * @param string $option
-         * @param int    $default
+         * @param string $option        User option name.
+         * @param int    $default_value Optional. The number of items to display. Default 20.
          * @return int
          */
-        protected function get_items_per_page($option, $default = 20)
+        protected function get_items_per_page($option, $default_value = 20)
         {
         }
         /**
@@ -4693,7 +4693,7 @@ namespace {
          */
         protected $update_results = array();
         /**
-         * Whether the entire automatic updater is disabled.
+         * Determines whether the entire automatic updater is disabled.
          *
          * @since 3.7.0
          */
@@ -4701,7 +4701,7 @@ namespace {
         {
         }
         /**
-         * Check for version control checkouts.
+         * Checks for version control checkouts.
          *
          * Checks for Subversion, Git, Mercurial, and Bazaar. It recursively looks up the
          * filesystem to the top of the drive, erring on the side of detecting a VCS
@@ -4751,7 +4751,7 @@ namespace {
         {
         }
         /**
-         * Update an item, if appropriate.
+         * Updates an item, if appropriate.
          *
          * @since 3.7.0
          *
@@ -5257,6 +5257,7 @@ namespace {
          * @since 4.8.0
          * @since 4.9.7 Stick a WordCamp to the final list.
          * @since 5.5.2 Accepts and returns only the events, rather than an entire HTTP response.
+         * @since 6.0.0 Decode HTML entities from the event title.
          *
          * @param array $events The events that will be prepared.
          * @return array The response body with events trimmed.
@@ -5312,16 +5313,16 @@ namespace {
         {
         }
         /**
-         * Returns the value of a MySQL variable.
+         * Returns the value of a MySQL system variable.
          *
          * @since 5.9.0
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string $var Name of the MySQL variable.
+         * @param string $mysql_var Name of the MySQL system variable.
          * @return string|null The variable value on success. Null if the variable does not exist.
          */
-        public static function get_mysql_var($var)
+        public static function get_mysql_var($mysql_var)
         {
         }
         /**
@@ -5329,11 +5330,11 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @param array  $info_array Information gathered from the `WP_Debug_Data::debug_data` function.
-         * @param string $type       The data type to return, either 'info' or 'debug'.
+         * @param array  $info_array Information gathered from the `WP_Debug_Data::debug_data()` function.
+         * @param string $data_type  The data type to return, either 'info' or 'debug'.
          * @return string The formatted data.
          */
-        public static function format($info_array, $type)
+        public static function format($info_array, $data_type)
         {
         }
         /**
@@ -5462,12 +5463,11 @@ namespace {
          * @see WP_Filesystem_Base::wp_themes_dir()
          * @see WP_Filesystem_Base::wp_lang_dir()
          *
-         * @param string $base The folder to start searching from.
-         * @param bool   $echo True to display debug information.
-         *                     Default false.
+         * @param string $base    Optional. The folder to start searching from. Default '.'.
+         * @param bool   $verbose Optional. True to display debug information. Default false.
          * @return string The location of the remote path.
          */
-        public function find_base_dir($base = '.', $echo = \false)
+        public function find_base_dir($base = '.', $verbose = \false)
         {
         }
         /**
@@ -5481,11 +5481,11 @@ namespace {
          * @see WP_Filesystem_Base::wp_themes_dir()
          * @see WP_Filesystem_Base::wp_lang_dir()
          *
-         * @param string $base The folder to start searching from.
-         * @param bool   $echo True to display debug information.
+         * @param string $base    Optional. The folder to start searching from. Default '.'.
+         * @param bool   $verbose Optional. True to display debug information. Default false.
          * @return string The location of the remote path.
          */
-        public function get_base_dir($base = '.', $echo = \false)
+        public function get_base_dir($base = '.', $verbose = \false)
         {
         }
         /**
@@ -7067,7 +7067,7 @@ namespace {
      * Restart Apache!
      * Check phpinfo() streams to confirm that: ssh2.shell, ssh2.exec, ssh2.tunnel, ssh2.scp, ssh2.sftp  exist.
      *
-     * Note: As of WordPress 2.8, this utilises the PHP5+ function `stream_get_contents()`.
+     * Note: As of WordPress 2.8, this utilizes the PHP5+ function `stream_get_contents()`.
      *
      * @since 2.7.0
      *
@@ -7580,12 +7580,12 @@ namespace {
         {
         }
         /**
-         * Replace newlines, tabs, and multiple spaces with a single space
+         * Replace newlines, tabs, and multiple spaces with a single space.
          *
-         * @param string $string
+         * @param string $text
          * @return string
          */
-        public function min_whitespace($string)
+        public function min_whitespace($text)
         {
         }
         /**
@@ -9273,12 +9273,12 @@ namespace {
          *
          * @since 4.4.0
          *
-         * @param string[] $args  Associative array of URL parameters for the link.
-         * @param string   $label Link text.
-         * @param string   $class Optional. Class attribute. Default empty string.
+         * @param string[] $args      Associative array of URL parameters for the link.
+         * @param string   $link_text Link text.
+         * @param string   $css_class Optional. Class attribute. Default empty string.
          * @return string The formatted link string.
          */
-        protected function get_edit_link($args, $label, $class = '')
+        protected function get_edit_link($args, $link_text, $css_class = '')
         {
         }
         /**
@@ -9385,13 +9385,13 @@ namespace {
          *
          * @param array $children_pages
          * @param int   $count
-         * @param int   $parent
+         * @param int   $parent_page
          * @param int   $level
          * @param int   $pagenum
          * @param int   $per_page
          * @param array $to_display List of pages to be displayed. Passed by reference.
          */
-        private function _page_rows(&$children_pages, &$count, $parent, $level, $pagenum, $per_page, &$to_display)
+        private function _page_rows(&$children_pages, &$count, $parent_page, $level, $pagenum, $per_page, &$to_display)
         {
         }
         /**
@@ -10137,8 +10137,8 @@ namespace {
          * @since 3.3.0
          *
          * @global WP_Screen $current_screen WordPress current screen object.
-         * @global string    $taxnow
-         * @global string    $typenow
+         * @global string    $typenow        The post type of the current screen.
+         * @global string    $taxnow         The taxonomy of the current screen.
          */
         public function set_current_screen()
         {
@@ -10785,15 +10785,15 @@ namespace {
          * Make the check for available PHP modules into a simple boolean operator for a cleaner test runner.
          *
          * @since 5.2.0
-         * @since 5.3.0 The `$constant` and `$class` parameters were added.
+         * @since 5.3.0 The `$constant_name` and `$class_name` parameters were added.
          *
-         * @param string $extension Optional. The extension name to test. Default null.
-         * @param string $function  Optional. The function name to test. Default null.
-         * @param string $constant  Optional. The constant name to test for. Default null.
-         * @param string $class     Optional. The class name to test for. Default null.
+         * @param string $extension_name Optional. The extension name to test. Default null.
+         * @param string $function_name  Optional. The function name to test. Default null.
+         * @param string $constant_name  Optional. The constant name to test for. Default null.
+         * @param string $class_name     Optional. The class name to test for. Default null.
          * @return bool Whether or not the extension and function are available.
          */
-        private function test_php_extension_availability($extension = \null, $function = \null, $constant = \null, $class = \null)
+        private function test_php_extension_availability($extension_name = \null, $function_name = \null, $constant_name = \null, $class_name = \null)
         {
         }
         /**
@@ -11195,7 +11195,7 @@ namespace {
          *
          * @param string $cropped              Cropped image URL.
          * @param int    $parent_attachment_id Attachment ID of parent image.
-         * @return array Attachment object.
+         * @return array An array with attachment object data.
          */
         public function create_attachment_object($cropped, $parent_attachment_id)
         {
@@ -11205,11 +11205,11 @@ namespace {
          *
          * @since 4.3.0
          *
-         * @param array  $object Attachment object.
-         * @param string $file   File path of the attached image.
-         * @return int           Attachment ID
+         * @param array  $attachment An array with attachment object data.
+         * @param string $file       File path of the attached image.
+         * @return int               Attachment ID.
          */
-        public function insert_attachment($object, $file)
+        public function insert_attachment($attachment, $file)
         {
         }
         /**
@@ -11348,10 +11348,10 @@ namespace {
          * @param int    $start
          * @param int    $per_page
          * @param int    $count
-         * @param int    $parent
+         * @param int    $parent_term
          * @param int    $level
          */
-        private function _rows($taxonomy, $terms, &$children, $start, $per_page, &$count, $parent = 0, $level = 0)
+        private function _rows($taxonomy, $terms, &$children, $start, $per_page, &$count, $parent_term = 0, $level = 0)
         {
         }
         /**
@@ -12290,7 +12290,7 @@ namespace {
         function is_declared_content_ns($new_mapping)
         {
         }
-        function xml_escape($string)
+        function xml_escape($content)
         {
         }
     }
@@ -14773,7 +14773,7 @@ namespace {
          *
          * @since 2.1.0
          * @todo Decouple this
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          */
@@ -14827,7 +14827,7 @@ namespace {
          * Database fields to use.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          * @todo Decouple this
@@ -14929,7 +14929,7 @@ namespace {
          * Database fields to use.
          *
          * @since 2.7.0
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          * @todo Decouple this
@@ -15125,7 +15125,7 @@ namespace {
          * Database fields to use.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          * @todo Decouple this
@@ -15140,15 +15140,15 @@ namespace {
          *
          * @see Walker::start_el()
          *
-         * @param string  $output             Used to append additional content. Passed by reference.
-         * @param WP_Post $data_object        Page data object.
-         * @param int     $depth              Optional. Depth of page in reference to parent pages.
-         *                                    Used for padding. Default 0.
-         * @param array   $args               Optional. Uses 'selected' argument for selected page to
-         *                                    set selected HTML attribute for option element. Uses
-         *                                    'value_field' argument to fill "value" attribute.
-         *                                    See wp_dropdown_pages(). Default empty array.
-         * @param int     $current_object_id  Optional. ID of the current page. Default 0.
+         * @param string  $output            Used to append additional content. Passed by reference.
+         * @param WP_Post $data_object       Page data object.
+         * @param int     $depth             Optional. Depth of page in reference to parent pages.
+         *                                   Used for padding. Default 0.
+         * @param array   $args              Optional. Uses 'selected' argument for selected page to
+         *                                   set selected HTML attribute for option element. Uses
+         *                                   'value_field' argument to fill "value" attribute.
+         *                                   See wp_dropdown_pages(). Default empty array.
+         * @param int     $current_object_id Optional. ID of the current page. Default 0.
          */
         public function start_el(&$output, $data_object, $depth = 0, $args = array(), $current_object_id = 0)
         {
@@ -15183,7 +15183,7 @@ namespace {
          * Database fields to use.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          *
          * @see Walker::$db_fields
          * @todo Decouple this.
@@ -15748,18 +15748,29 @@ namespace {
      * @since 5.8.0
      */
     /**
-     * Class representing a current block editor context.
-     *
-     * The expectation is that block editor can have a different set
-     * of requirements on every screen where it is used. This class
-     * allows to define supporting settings that can be used with filters.
+     * Contains information about a block editor being rendered.
      *
      * @since 5.8.0
      */
     final class WP_Block_Editor_Context
     {
         /**
-         * Post being edited. Optional.
+         * String that identifies the block editor being rendered. Can be one of:
+         *
+         * - `'core/edit-post'`         - The post editor at `/wp-admin/edit.php`.
+         * - `'core/edit-widgets'`      - The widgets editor at `/wp-admin/widgets.php`.
+         * - `'core/customize-widgets'` - The widgets editor at `/wp-admin/customize.php`.
+         * - `'core/edit-site'`         - The site editor at `/wp-admin/site-editor.php`.
+         *
+         * Defaults to 'core/edit-post'.
+         *
+         * @since 6.0.0
+         *
+         * @var string
+         */
+        public $name = 'core/edit-post';
+        /**
+         * The post being edited by the block editor. Optional.
          *
          * @since 5.8.0
          *
@@ -16259,9 +16270,16 @@ namespace {
          * Registered block pattern categories array.
          *
          * @since 5.5.0
-         * @var array
+         * @var array[]
          */
         private $registered_categories = array();
+        /**
+         * Pattern categories registered outside the `init` action.
+         *
+         * @since 6.0.0
+         * @var array[]
+         */
+        private $registered_categories_outside_init = array();
         /**
          * Container for the main instance of the class.
          *
@@ -16312,9 +16330,10 @@ namespace {
          *
          * @since 5.5.0
          *
-         * @return array Array of arrays containing the registered pattern categories properties.
+         * @param bool $outside_init_only Return only categories registered outside the `init` action.
+         * @return array[] Array of arrays containing the registered pattern categories properties.
          */
-        public function get_all_registered()
+        public function get_all_registered($outside_init_only = \false)
         {
         }
         /**
@@ -16359,9 +16378,16 @@ namespace {
          * Registered block patterns array.
          *
          * @since 5.5.0
-         * @var array
+         * @var array[]
          */
         private $registered_patterns = array();
+        /**
+         * Patterns registered outside the `init` action.
+         *
+         * @since 6.0.0
+         * @var array[]
+         */
+        private $registered_patterns_outside_init = array();
         /**
          * Container for the main instance of the class.
          *
@@ -16373,6 +16399,7 @@ namespace {
          * Registers a block pattern.
          *
          * @since 5.5.0
+         * @since 5.8.0 Added support for the `blockTypes` property.
          *
          * @param string $pattern_name       Block pattern name including namespace.
          * @param array  $pattern_properties {
@@ -16391,6 +16418,13 @@ namespace {
          *                                 patterns. Block patterns can be shown on multiple categories.
          *                                 A category must be registered separately in order to be used
          *                                 here.
+         *     @type array  $blockTypes    Optional. A list of block names including namespace that could use
+         *                                 the block pattern in certain contexts (placeholder, transforms).
+         *                                 The block pattern is available in the block editor inserter
+         *                                 regardless of this list of block names.
+         *                                 Certain blocks support further specificity besides the block name
+         *                                 (e.g. for `core/template-part` you can specify areas
+         *                                 like `core/template-part/header` or `core/template-part/footer`).
          *     @type array  $keywords      Optional. A list of aliases or keywords that help users discover the
          *                                 pattern while searching.
          * }
@@ -16426,10 +16460,11 @@ namespace {
          *
          * @since 5.5.0
          *
-         * @return array Array of arrays containing the registered block patterns properties,
-         *               and per style.
+         * @param bool $outside_init_only Return only patterns registered outside the `init` action.
+         * @return array[] Array of arrays containing the registered block patterns properties,
+         *                 and per style.
          */
-        public function get_all_registered()
+        public function get_all_registered($outside_init_only = \false)
         {
         }
         /**
@@ -16946,6 +16981,14 @@ namespace {
          */
         public $parent = \null;
         /**
+         * Setting ancestor makes a block available only inside the specified
+         * block types at any position of the ancestor's block subtree.
+         *
+         * @since 6.0.0
+         * @var array|null
+         */
+        public $ancestor = \null;
+        /**
          * Block type icon.
          *
          * @since 5.5.0
@@ -16964,7 +17007,7 @@ namespace {
          * in search interfaces.
          *
          * @since 5.5.0
-         * @var array
+         * @var string[]
          */
         public $keywords = array();
         /**
@@ -17066,6 +17109,13 @@ namespace {
          */
         public $style = \null;
         /**
+         * Attributes supported by every block.
+         *
+         * @since 6.0.0
+         * @var array
+         */
+        const GLOBAL_ATTRIBUTES = array('lock' => array('type' => 'object'));
+        /**
          * Constructor.
          *
          * Will populate object properties from the provided arguments.
@@ -17077,6 +17127,7 @@ namespace {
          * @since 5.6.0 Added the `api_version` property.
          * @since 5.8.0 Added the `variations` property.
          * @since 5.9.0 Added the `view_script` property.
+         * @since 6.0.0 Added the `ancestor` property.
          *
          * @see register_block_type()
          *
@@ -17091,9 +17142,11 @@ namespace {
          *                                           search interfaces to arrange block types by category.
          *     @type array|null    $parent           Setting parent lets a block require that it is only
          *                                           available when nested within the specified blocks.
+         *     @type array|null    $ancestor         Setting ancestor makes a block available only inside the specified
+         *                                           block types at any position of the ancestor's block subtree.
          *     @type string|null   $icon             Block type icon.
          *     @type string        $description      A detailed block type description.
-         *     @type array         $keywords         Additional keywords to produce block type as
+         *     @type string[]      $keywords         Additional keywords to produce block type as
          *                                           result in search interfaces.
          *     @type string|null   $textdomain       The translation textdomain.
          *     @type array         $styles           Alternative block styles.
@@ -17391,7 +17444,7 @@ namespace {
          * List of comments located by the query.
          *
          * @since 4.0.0
-         * @var array
+         * @var int[]|WP_Comment[]
          */
         public $comments;
         /**
@@ -17598,7 +17651,7 @@ namespace {
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @return int|array List of comments or number of found comments if `$count` argument is true.
+         * @return int|int[]|WP_Comment[] List of comments or number of found comments if `$count` argument is true.
          */
         public function get_comments()
         {
@@ -17643,17 +17696,17 @@ namespace {
         {
         }
         /**
-         * Used internally to generate an SQL string for searching across multiple columns
+         * Used internally to generate an SQL string for searching across multiple columns.
          *
          * @since 3.1.0
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string $string
-         * @param array  $cols
-         * @return string
+         * @param string   $search  Search string.
+         * @param string[] $columns Array of columns to search.
+         * @return string Search SQL.
          */
-        protected function get_search_sql($string, $cols)
+        protected function get_search_sql($search, $columns)
         {
         }
         /**
@@ -18576,7 +18629,7 @@ namespace {
         {
         }
         /**
-         * Return true if it's an Ajax request.
+         * Returns true if it's an Ajax request.
          *
          * @since 3.4.0
          * @since 4.2.0 Added `$action` param.
@@ -18600,7 +18653,7 @@ namespace {
         {
         }
         /**
-         * Return the Ajax wp_die() handler if it's a customized request.
+         * Returns the Ajax wp_die() handler if it's a customized request.
          *
          * @since 3.4.0
          * @deprecated 4.7.0
@@ -18611,19 +18664,19 @@ namespace {
         {
         }
         /**
-         * Start preview and customize theme.
+         * Starts preview and customize theme.
          *
-         * Check if customize query variable exist. Init filters to filter the current theme.
+         * Check if customize query variable exist. Init filters to filter the active theme.
          *
          * @since 3.4.0
          *
-         * @global string $pagenow
+         * @global string $pagenow The filename of the current screen.
          */
         public function setup_theme()
         {
         }
         /**
-         * Establish the loaded changeset.
+         * Establishes the loaded changeset.
          *
          * This method runs right at after_setup_theme and applies the 'customize_changeset_branching' filter to determine
          * whether concurrent changesets are allowed. Then if the Customizer is not initialized with a `changeset_uuid` param,
@@ -18633,7 +18686,7 @@ namespace {
          *
          * @since 4.9.0
          *
-         * @global string $pagenow
+         * @global string $pagenow The filename of the current screen.
          */
         public function establish_loaded_changeset()
         {
@@ -18656,9 +18709,9 @@ namespace {
         {
         }
         /**
-         * Stop previewing the selected theme.
+         * Stops previewing the selected theme.
          *
-         * Removes filters to change the current theme.
+         * Removes filters to change the active theme.
          *
          * @since 3.4.0
          */
@@ -18702,7 +18755,7 @@ namespace {
         {
         }
         /**
-         * Get the changeset UUID.
+         * Gets the changeset UUID.
          *
          * @since 4.7.0
          *
@@ -18714,7 +18767,7 @@ namespace {
         {
         }
         /**
-         * Get the theme being customized.
+         * Gets the theme being customized.
          *
          * @since 3.4.0
          *
@@ -18724,7 +18777,7 @@ namespace {
         {
         }
         /**
-         * Get the registered settings.
+         * Gets the registered settings.
          *
          * @since 3.4.0
          *
@@ -18734,7 +18787,7 @@ namespace {
         {
         }
         /**
-         * Get the registered controls.
+         * Gets the registered controls.
          *
          * @since 3.4.0
          *
@@ -18744,7 +18797,7 @@ namespace {
         {
         }
         /**
-         * Get the registered containers.
+         * Gets the registered containers.
          *
          * @since 4.0.0
          *
@@ -18754,7 +18807,7 @@ namespace {
         {
         }
         /**
-         * Get the registered sections.
+         * Gets the registered sections.
          *
          * @since 3.4.0
          *
@@ -18764,7 +18817,7 @@ namespace {
         {
         }
         /**
-         * Get the registered panels.
+         * Gets the registered panels.
          *
          * @since 4.0.0
          *
@@ -18784,7 +18837,7 @@ namespace {
         {
         }
         /**
-         * Register styles/scripts and initialize the preview of each setting
+         * Registers styles/scripts and initialize the preview of each setting
          *
          * @since 3.4.0
          */
@@ -18807,7 +18860,7 @@ namespace {
         {
         }
         /**
-         * Find the changeset post ID for a given changeset UUID.
+         * Finds the changeset post ID for a given changeset UUID.
          *
          * @since 4.7.0
          *
@@ -18818,7 +18871,7 @@ namespace {
         {
         }
         /**
-         * Get changeset posts.
+         * Gets changeset posts.
          *
          * @since 4.9.0
          *
@@ -18836,7 +18889,7 @@ namespace {
         {
         }
         /**
-         * Dismiss all of the current user's auto-drafts (other than the present one).
+         * Dismisses all of the current user's auto-drafts (other than the present one).
          *
          * @since 4.9.0
          * @return int The number of auto-drafts that were dismissed.
@@ -18845,7 +18898,7 @@ namespace {
         {
         }
         /**
-         * Get the changeset post ID for the loaded changeset.
+         * Gets the changeset post ID for the loaded changeset.
          *
          * @since 4.7.0
          *
@@ -18855,7 +18908,7 @@ namespace {
         {
         }
         /**
-         * Get the data stored in a changeset post.
+         * Gets the data stored in a changeset post.
          *
          * @since 4.7.0
          *
@@ -18866,7 +18919,7 @@ namespace {
         {
         }
         /**
-         * Get changeset data.
+         * Gets changeset data.
          *
          * @since 4.7.0
          * @since 4.9.0 This will return the changeset's data with a user's autosave revision merged on top, if one exists and $autosaved is true.
@@ -18884,7 +18937,7 @@ namespace {
          */
         protected $pending_starter_content_settings_ids = array();
         /**
-         * Import theme starter content into the customized state.
+         * Imports theme starter content into the customized state.
          *
          * @since 4.7.0
          *
@@ -18894,7 +18947,7 @@ namespace {
         {
         }
         /**
-         * Prepare starter content attachments.
+         * Prepares starter content attachments.
          *
          * Ensure that the attachments are valid and that they have slugs and file name/path.
          *
@@ -18907,7 +18960,7 @@ namespace {
         {
         }
         /**
-         * Save starter content changeset.
+         * Saves starter content changeset.
          *
          * @since 4.7.0
          */
@@ -18915,7 +18968,7 @@ namespace {
         {
         }
         /**
-         * Get dirty pre-sanitized setting values in the current customized state.
+         * Gets dirty pre-sanitized setting values in the current customized state.
          *
          * The returned array consists of a merge of three sources:
          * 1. If the theme is not currently active, then the base array is any stashed
@@ -18952,23 +19005,23 @@ namespace {
          * from the current changeset post and from the incoming post data.
          *
          * @since 3.4.0
-         * @since 4.1.1 Introduced the `$default` parameter.
-         * @since 4.6.0 `$default` is now returned early when the setting post value is invalid.
+         * @since 4.1.1 Introduced the `$default_value` parameter.
+         * @since 4.6.0 `$default_value` is now returned early when the setting post value is invalid.
          *
          * @see WP_REST_Server::dispatch()
          * @see WP_REST_Request::sanitize_params()
          * @see WP_REST_Request::has_valid_params()
          *
-         * @param WP_Customize_Setting $setting A WP_Customize_Setting derived object.
-         * @param mixed                $default Value returned $setting has no post value (added in 4.2.0)
-         *                                      or the post value is invalid (added in 4.6.0).
-         * @return string|mixed Sanitized value or the $default provided.
+         * @param WP_Customize_Setting $setting       A WP_Customize_Setting derived object.
+         * @param mixed                $default_value Value returned if `$setting` has no post value (added in 4.2.0)
+         *                                            or the post value is invalid (added in 4.6.0).
+         * @return string|mixed Sanitized value or the `$default_value` provided.
          */
-        public function post_value($setting, $default = \null)
+        public function post_value($setting, $default_value = \null)
         {
         }
         /**
-         * Override a setting's value in the current customized state.
+         * Overrides a setting's value in the current customized state.
          *
          * The name "post_value" is a carry-over from when the customized state was
          * exclusively sourced from `$_POST['customized']`.
@@ -18982,7 +19035,7 @@ namespace {
         {
         }
         /**
-         * Print JavaScript settings.
+         * Prints JavaScript settings.
          *
          * @since 3.4.0
          */
@@ -19001,7 +19054,7 @@ namespace {
         {
         }
         /**
-         * Add customize state query params to a given URL if preview is allowed.
+         * Adds customize state query params to a given URL if preview is allowed.
          *
          * @since 4.7.0
          *
@@ -19015,7 +19068,7 @@ namespace {
         {
         }
         /**
-         * Prevent sending a 404 status when returning the response for the customize
+         * Prevents sending a 404 status when returning the response for the customize
          * preview, since it causes the jQuery Ajax to fail. Send 200 instead.
          *
          * @since 4.0.0
@@ -19025,7 +19078,7 @@ namespace {
         {
         }
         /**
-         * Print base element for preview frame.
+         * Prints base element for preview frame.
          *
          * @since 3.4.0
          * @deprecated 4.7.0
@@ -19034,7 +19087,7 @@ namespace {
         {
         }
         /**
-         * Print a workaround to handle HTML5 tags in IE < 9.
+         * Prints a workaround to handle HTML5 tags in IE < 9.
          *
          * @since 3.4.0
          * @deprecated 4.7.0 Customizer no longer supports IE8, so all supported browsers recognize HTML5.
@@ -19043,7 +19096,7 @@ namespace {
         {
         }
         /**
-         * Print CSS for loading indicators for the Customizer preview.
+         * Prints CSS for loading indicators for the Customizer preview.
          *
          * @since 4.2.0
          */
@@ -19051,7 +19104,7 @@ namespace {
         {
         }
         /**
-         * Remove customize_messenger_channel query parameter from the preview window when it is not in an iframe.
+         * Removes customize_messenger_channel query parameter from the preview window when it is not in an iframe.
          *
          * This ensures that the admin bar will be shown. It also ensures that link navigation will
          * work as expected since the parent frame is not being sent the URL to navigate to.
@@ -19062,7 +19115,7 @@ namespace {
         {
         }
         /**
-         * Print JavaScript settings for preview frame.
+         * Prints JavaScript settings for preview frame.
          *
          * @since 3.4.0
          */
@@ -19084,14 +19137,15 @@ namespace {
          * @since 3.4.0
          * @deprecated 4.7.0
          *
-         * @param mixed $return Value passed through for {@see 'wp_die_handler'} filter.
-         * @return mixed Value passed through for {@see 'wp_die_handler'} filter.
+         * @param callable|null $callback Optional. Value passed through for {@see 'wp_die_handler'} filter.
+         *                                Default null.
+         * @return callable|null Value passed through for {@see 'wp_die_handler'} filter.
          */
-        public function remove_preview_signature($return = \null)
+        public function remove_preview_signature($callback = \null)
         {
         }
         /**
-         * Is it a theme preview?
+         * Determines whether it is a theme preview or not.
          *
          * @since 3.4.0
          *
@@ -19101,7 +19155,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the template name of the previewed theme.
+         * Retrieves the template name of the previewed theme.
          *
          * @since 3.4.0
          *
@@ -19111,7 +19165,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the stylesheet name of the previewed theme.
+         * Retrieves the stylesheet name of the previewed theme.
          *
          * @since 3.4.0
          *
@@ -19121,7 +19175,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the template root of the previewed theme.
+         * Retrieves the template root of the previewed theme.
          *
          * @since 3.4.0
          *
@@ -19131,7 +19185,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the stylesheet root of the previewed theme.
+         * Retrieves the stylesheet root of the previewed theme.
          *
          * @since 3.4.0
          *
@@ -19141,7 +19195,7 @@ namespace {
         {
         }
         /**
-         * Filters the current theme and return the name of the previewed theme.
+         * Filters the active theme and return the name of the previewed theme.
          *
          * @since 3.4.0
          *
@@ -19193,7 +19247,7 @@ namespace {
         {
         }
         /**
-         * Handle customize_save WP Ajax request to save/update a changeset.
+         * Handles customize_save WP Ajax request to save/update a changeset.
          *
          * @since 3.4.0
          * @since 4.7.0 The semantics of this method have changed to update a changeset, optionally to also change the status and other attributes.
@@ -19202,7 +19256,7 @@ namespace {
         {
         }
         /**
-         * Save the post for the loaded changeset.
+         * Saves the post for the loaded changeset.
          *
          * @since 4.7.0
          *
@@ -19224,7 +19278,7 @@ namespace {
         {
         }
         /**
-         * Preserve the initial JSON post_content passed to save into the post.
+         * Preserves the initial JSON post_content passed to save into the post.
          *
          * This is needed to prevent KSES and other {@see 'content_save_pre'} filters
          * from corrupting JSON data.
@@ -19256,7 +19310,7 @@ namespace {
         {
         }
         /**
-         * Trash or delete a changeset post.
+         * Trashes or deletes a changeset post.
          *
          * The following re-formulates the logic from `wp_trash_post()` as done in
          * `wp_publish_post()`. The reason for bypassing `wp_trash_post()` is that it
@@ -19275,7 +19329,7 @@ namespace {
         {
         }
         /**
-         * Handle request to trash a changeset.
+         * Handles request to trash a changeset.
          *
          * @since 4.9.0
          */
@@ -19283,7 +19337,7 @@ namespace {
         {
         }
         /**
-         * Re-map 'edit_post' meta cap for a customize_changeset post to be the same as 'customize' maps.
+         * Re-maps 'edit_post' meta cap for a customize_changeset post to be the same as 'customize' maps.
          *
          * There is essentially a "meta meta" cap in play here, where 'edit_post' meta cap maps to
          * the 'customize' meta cap which then maps to 'edit_theme_options'. This is currently
@@ -19332,6 +19386,9 @@ namespace {
          * Filters heartbeat settings for the Customizer.
          *
          * @since 4.9.0
+         *
+         * @global string $pagenow The filename of the current screen.
+         *
          * @param array $settings Current settings to filter.
          * @return array Heartbeat settings.
          */
@@ -19339,7 +19396,7 @@ namespace {
         {
         }
         /**
-         * Get lock user data.
+         * Gets lock user data.
          *
          * @since 4.9.0
          *
@@ -19350,7 +19407,7 @@ namespace {
         {
         }
         /**
-         * Check locked changeset with heartbeat API.
+         * Checks locked changeset with heartbeat API.
          *
          * @since 4.9.0
          *
@@ -19371,7 +19428,7 @@ namespace {
         {
         }
         /**
-         * Whether a changeset revision should be made.
+         * Determines whether a changeset revision should be made.
          *
          * @since 4.7.0
          * @var bool
@@ -19393,9 +19450,9 @@ namespace {
         {
         }
         /**
-         * Publish changeset values.
+         * Publishes the values of a changeset.
          *
-         * This will the values contained in a changeset, even changesets that do not
+         * This will publish the values contained in a changeset, even changesets that do not
          * correspond to current manager instance. This is called by
          * `_wp_customize_publish_changeset()` when a customize_changeset post is
          * transitioned to the `publish` status. As such, this method should not be
@@ -19417,7 +19474,7 @@ namespace {
         {
         }
         /**
-         * Update stashed theme mod settings.
+         * Updates stashed theme mod settings.
          *
          * @since 4.7.0
          *
@@ -19428,7 +19485,7 @@ namespace {
         {
         }
         /**
-         * Refresh nonces for the current preview.
+         * Refreshes nonces for the current preview.
          *
          * @since 4.2.0
          */
@@ -19436,7 +19493,7 @@ namespace {
         {
         }
         /**
-         * Delete a given auto-draft changeset or the autosave revision for a given changeset or delete changeset lock.
+         * Deletes a given auto-draft changeset or the autosave revision for a given changeset or delete changeset lock.
          *
          * @since 4.9.0
          */
@@ -19444,7 +19501,7 @@ namespace {
         {
         }
         /**
-         * Add a customize setting.
+         * Adds a customize setting.
          *
          * @since 3.4.0
          * @since 4.5.0 Return added WP_Customize_Setting instance.
@@ -19462,7 +19519,7 @@ namespace {
         {
         }
         /**
-         * Register any dynamically-created settings, such as those from $_POST['customized']
+         * Registers any dynamically-created settings, such as those from $_POST['customized']
          * that have no corresponding setting created.
          *
          * This is a mechanism to "wake up" settings that have been dynamically created
@@ -19479,7 +19536,7 @@ namespace {
         {
         }
         /**
-         * Retrieve a customize setting.
+         * Retrieves a customize setting.
          *
          * @since 3.4.0
          *
@@ -19490,7 +19547,7 @@ namespace {
         {
         }
         /**
-         * Remove a customize setting.
+         * Removes a customize setting.
          *
          * Note that removing the setting doesn't destroy the WP_Customize_Setting instance or remove its filters.
          *
@@ -19502,7 +19559,7 @@ namespace {
         {
         }
         /**
-         * Add a customize panel.
+         * Adds a customize panel.
          *
          * @since 4.0.0
          * @since 4.5.0 Return added WP_Customize_Panel instance.
@@ -19519,7 +19576,7 @@ namespace {
         {
         }
         /**
-         * Retrieve a customize panel.
+         * Retrieves a customize panel.
          *
          * @since 4.0.0
          *
@@ -19530,7 +19587,7 @@ namespace {
         {
         }
         /**
-         * Remove a customize panel.
+         * Removes a customize panel.
          *
          * Note that removing the panel doesn't destroy the WP_Customize_Panel instance or remove its filters.
          *
@@ -19542,7 +19599,7 @@ namespace {
         {
         }
         /**
-         * Register a customize panel type.
+         * Registers a customize panel type.
          *
          * Registered types are eligible to be rendered via JS and created dynamically.
          *
@@ -19556,7 +19613,7 @@ namespace {
         {
         }
         /**
-         * Render JS templates for all registered panel types.
+         * Renders JS templates for all registered panel types.
          *
          * @since 4.3.0
          */
@@ -19564,7 +19621,7 @@ namespace {
         {
         }
         /**
-         * Add a customize section.
+         * Adds a customize section.
          *
          * @since 3.4.0
          * @since 4.5.0 Return added WP_Customize_Section instance.
@@ -19581,7 +19638,7 @@ namespace {
         {
         }
         /**
-         * Retrieve a customize section.
+         * Retrieves a customize section.
          *
          * @since 3.4.0
          *
@@ -19592,7 +19649,7 @@ namespace {
         {
         }
         /**
-         * Remove a customize section.
+         * Removes a customize section.
          *
          * Note that removing the section doesn't destroy the WP_Customize_Section instance or remove its filters.
          *
@@ -19604,7 +19661,7 @@ namespace {
         {
         }
         /**
-         * Register a customize section type.
+         * Registers a customize section type.
          *
          * Registered types are eligible to be rendered via JS and created dynamically.
          *
@@ -19618,7 +19675,7 @@ namespace {
         {
         }
         /**
-         * Render JS templates for all registered section types.
+         * Renders JS templates for all registered section types.
          *
          * @since 4.3.0
          */
@@ -19626,7 +19683,7 @@ namespace {
         {
         }
         /**
-         * Add a customize control.
+         * Adds a customize control.
          *
          * @since 3.4.0
          * @since 4.5.0 Return added WP_Customize_Control instance.
@@ -19643,7 +19700,7 @@ namespace {
         {
         }
         /**
-         * Retrieve a customize control.
+         * Retrieves a customize control.
          *
          * @since 3.4.0
          *
@@ -19654,7 +19711,7 @@ namespace {
         {
         }
         /**
-         * Remove a customize control.
+         * Removes a customize control.
          *
          * Note that removing the control doesn't destroy the WP_Customize_Control instance or remove its filters.
          *
@@ -19666,7 +19723,7 @@ namespace {
         {
         }
         /**
-         * Register a customize control type.
+         * Registers a customize control type.
          *
          * Registered types are eligible to be rendered via JS and created dynamically.
          *
@@ -19679,7 +19736,7 @@ namespace {
         {
         }
         /**
-         * Render JS templates for all registered control types.
+         * Renders JS templates for all registered control types.
          *
          * @since 4.1.0
          */
@@ -19700,7 +19757,7 @@ namespace {
         {
         }
         /**
-         * Prepare panels, sections, and controls.
+         * Prepares panels, sections, and controls.
          *
          * For each, check if required related components exist,
          * whether the user has the necessary capabilities,
@@ -19712,7 +19769,7 @@ namespace {
         {
         }
         /**
-         * Enqueue scripts for customize controls.
+         * Enqueues scripts for customize controls.
          *
          * @since 3.4.0
          */
@@ -19720,7 +19777,7 @@ namespace {
         {
         }
         /**
-         * Determine whether the user agent is iOS.
+         * Determines whether the user agent is iOS.
          *
          * @since 4.4.0
          *
@@ -19730,7 +19787,7 @@ namespace {
         {
         }
         /**
-         * Get the template string for the Customizer pane document title.
+         * Gets the template string for the Customizer pane document title.
          *
          * @since 4.4.0
          *
@@ -19740,7 +19797,7 @@ namespace {
         {
         }
         /**
-         * Set the initial URL to be previewed.
+         * Sets the initial URL to be previewed.
          *
          * URL is validated.
          *
@@ -19752,7 +19809,7 @@ namespace {
         {
         }
         /**
-         * Get the initial URL to be previewed.
+         * Gets the initial URL to be previewed.
          *
          * @since 4.4.0
          *
@@ -19772,7 +19829,7 @@ namespace {
         {
         }
         /**
-         * Get URLs allowed to be previewed.
+         * Gets URLs allowed to be previewed.
          *
          * If the front end and the admin are served from the same domain, load the
          * preview over ssl if the Customizer is being loaded over ssl. This avoids
@@ -19789,7 +19846,7 @@ namespace {
         {
         }
         /**
-         * Get messenger channel.
+         * Gets messenger channel.
          *
          * @since 4.7.0
          *
@@ -19799,7 +19856,7 @@ namespace {
         {
         }
         /**
-         * Set URL to link the user to when closing the Customizer.
+         * Sets URL to link the user to when closing the Customizer.
          *
          * URL is validated.
          *
@@ -19811,7 +19868,7 @@ namespace {
         {
         }
         /**
-         * Get URL to link the user to when closing the Customizer.
+         * Gets URL to link the user to when closing the Customizer.
          *
          * @since 4.4.0
          *
@@ -19823,7 +19880,7 @@ namespace {
         {
         }
         /**
-         * Set the autofocused constructs.
+         * Sets the autofocused constructs.
          *
          * @since 4.4.0
          *
@@ -19839,7 +19896,7 @@ namespace {
         {
         }
         /**
-         * Get the autofocused constructs.
+         * Gets the autofocused constructs.
          *
          * @since 4.4.0
          *
@@ -19855,7 +19912,7 @@ namespace {
         {
         }
         /**
-         * Get nonces for the Customizer.
+         * Gets nonces for the Customizer.
          *
          * @since 4.5.0
          *
@@ -19865,7 +19922,7 @@ namespace {
         {
         }
         /**
-         * Print JavaScript settings for parent window.
+         * Prints JavaScript settings for parent window.
          *
          * @since 4.4.0
          */
@@ -19883,7 +19940,7 @@ namespace {
         {
         }
         /**
-         * Register some default controls.
+         * Registers some default controls.
          *
          * @since 3.4.0
          */
@@ -19891,7 +19948,7 @@ namespace {
         {
         }
         /**
-         * Return whether there are published pages.
+         * Returns whether there are published pages.
          *
          * Used as active callback for static front page section and controls.
          *
@@ -19903,7 +19960,7 @@ namespace {
         {
         }
         /**
-         * Add settings from the POST data that were not added with code, e.g. dynamically-created settings for Widgets
+         * Adds settings from the POST data that were not added with code, e.g. dynamically-created settings for Widgets
          *
          * @since 4.2.0
          *
@@ -19913,7 +19970,7 @@ namespace {
         {
         }
         /**
-         * Load themes into the theme browsing/installation UI.
+         * Loads themes into the theme browsing/installation UI.
          *
          * @since 4.9.0
          */
@@ -19947,7 +20004,7 @@ namespace {
         {
         }
         /**
-         * Export header video settings to facilitate selective refresh.
+         * Exports header video settings to facilitate selective refresh.
          *
          * @since 4.7.0
          *
@@ -20083,13 +20140,13 @@ namespace {
          *
          * @since 4.3.0
          *
-         * @param string $type   Optional. Accepts any custom object type and has built-in support for
-         *                         'post_type' and 'taxonomy'. Default is 'post_type'.
-         * @param string $object Optional. Accepts any registered taxonomy or post type name. Default is 'page'.
-         * @param int    $page   Optional. The page number used to generate the query offset. Default is '0'.
+         * @param string $object_type Optional. Accepts any custom object type and has built-in support for
+         *                            'post_type' and 'taxonomy'. Default is 'post_type'.
+         * @param string $object_name Optional. Accepts any registered taxonomy or post type name. Default is 'page'.
+         * @param int    $page        Optional. The page number used to generate the query offset. Default is '0'.
          * @return array|WP_Error An array of menu items on success, a WP_Error object on failure.
          */
-        public function load_available_items_query($type = 'post_type', $object = 'page', $page = 0)
+        public function load_available_items_query($object_type = 'post_type', $object_name = 'page', $page = 0)
         {
         }
         /**
@@ -20114,7 +20171,7 @@ namespace {
         {
         }
         /**
-         * Enqueue scripts and styles for Customizer pane.
+         * Enqueues scripts and styles for Customizer pane.
          *
          * @since 4.3.0
          */
@@ -20138,7 +20195,7 @@ namespace {
         {
         }
         /**
-         * Allow non-statically created settings to be constructed with custom WP_Customize_Setting subclass.
+         * Allows non-statically created settings to be constructed with custom WP_Customize_Setting subclass.
          *
          * @since 4.3.0
          *
@@ -20151,7 +20208,7 @@ namespace {
         {
         }
         /**
-         * Add the customizer settings and controls.
+         * Adds the customizer settings and controls.
          *
          * @since 4.3.0
          */
@@ -20159,7 +20216,7 @@ namespace {
         {
         }
         /**
-         * Get the base10 intval.
+         * Gets the base10 intval.
          *
          * This is used as a setting's sanitize_callback; we can't use just plain
          * intval because the second argument is not what intval() expects.
@@ -20173,7 +20230,7 @@ namespace {
         {
         }
         /**
-         * Return an array of all the available item types.
+         * Returns an array of all the available item types.
          *
          * @since 4.3.0
          * @since 4.7.0  Each array item now includes a `$type_label` in addition to `$title`, `$type`, and `$object`.
@@ -20184,7 +20241,7 @@ namespace {
         {
         }
         /**
-         * Add a new `auto-draft` post.
+         * Adds a new `auto-draft` post.
          *
          * @since 4.7.0
          *
@@ -20210,7 +20267,7 @@ namespace {
         {
         }
         /**
-         * Print the JavaScript templates used to render Menu Customizer components.
+         * Prints the JavaScript templates used to render Menu Customizer components.
          *
          * Templates are imported into the JS use wp.template.
          *
@@ -20220,7 +20277,7 @@ namespace {
         {
         }
         /**
-         * Print the HTML template used to render the add-menu-item frame.
+         * Prints the HTML template used to render the add-menu-item frame.
          *
          * @since 4.3.0
          */
@@ -20228,24 +20285,21 @@ namespace {
         {
         }
         /**
-         * Print the markup for new menu items.
+         * Prints the markup for new menu items.
          *
          * To be used in the template #available-menu-items.
          *
          * @since 4.7.0
          *
          * @param array $available_item_type Menu item data to output, including title, type, and label.
-         * @return void
          */
         protected function print_post_type_container($available_item_type)
         {
         }
         /**
-         * Print the markup for available menu item custom links.
+         * Prints the markup for available menu item custom links.
          *
          * @since 4.7.0
-         *
-         * @return void
          */
         protected function print_custom_links_available_menu_item()
         {
@@ -20273,7 +20327,7 @@ namespace {
         {
         }
         /**
-         * Add hooks for the Customizer preview.
+         * Adds hooks for the Customizer preview.
          *
          * @since 4.3.0
          */
@@ -20281,7 +20335,7 @@ namespace {
         {
         }
         /**
-         * Make the auto-draft status protected so that it can be queried.
+         * Makes the auto-draft status protected so that it can be queried.
          *
          * @since 4.7.0
          *
@@ -20291,7 +20345,7 @@ namespace {
         {
         }
         /**
-         * Sanitize post IDs for posts created for nav menu items to be published.
+         * Sanitizes post IDs for posts created for nav menu items to be published.
          *
          * @since 4.7.0
          *
@@ -20302,7 +20356,7 @@ namespace {
         {
         }
         /**
-         * Publish the auto-draft posts that were created for nav menu items.
+         * Publishes the auto-draft posts that were created for nav menu items.
          *
          * The post IDs will have been sanitized by already by
          * `WP_Customize_Nav_Menu_Items::sanitize_nav_menus_created_posts()` to
@@ -20317,7 +20371,7 @@ namespace {
         {
         }
         /**
-         * Keep track of the arguments that are being passed to wp_nav_menu().
+         * Keeps track of the arguments that are being passed to wp_nav_menu().
          *
          * @since 4.3.0
          *
@@ -20361,7 +20415,7 @@ namespace {
         {
         }
         /**
-         * Enqueue scripts for the Customizer preview.
+         * Enqueues scripts for the Customizer preview.
          *
          * @since 4.3.0
          */
@@ -20377,7 +20431,7 @@ namespace {
         {
         }
         /**
-         * Export any wp_nav_menu() calls during the rendering of any partials.
+         * Exports any wp_nav_menu() calls during the rendering of any partials.
          *
          * @since 4.5.0
          *
@@ -20388,7 +20442,7 @@ namespace {
         {
         }
         /**
-         * Render a specific menu via wp_nav_menu() using the supplied arguments.
+         * Renders a specific menu via wp_nav_menu() using the supplied arguments.
          *
          * @since 4.3.0
          *
@@ -21229,10 +21283,10 @@ namespace {
          *
          * @since 3.4.0
          *
-         * @param mixed $default A default value which is used as a fallback. Default null.
+         * @param mixed $default_value A default value which is used as a fallback. Default null.
          * @return mixed The default value on failure, otherwise the sanitized and validated value.
          */
-        public final function post_value($default = \null)
+        public final function post_value($default_value = \null)
         {
         }
         /**
@@ -21264,10 +21318,10 @@ namespace {
          *
          * @since 4.4.0
          *
-         * @param mixed $default Value to return if root does not exist.
+         * @param mixed $default_value Value to return if root does not exist.
          * @return mixed
          */
-        protected function get_root_value($default = \null)
+        protected function get_root_value($default_value = \null)
         {
         }
         /**
@@ -21383,10 +21437,10 @@ namespace {
          *
          * @param array $root
          * @param array $keys
-         * @param mixed $default A default value which is used as a fallback. Default null.
+         * @param mixed $default_value A default value which is used as a fallback. Default null.
          * @return mixed The requested value or the default value.
          */
-        protected final function multidimensional_get($root, $keys, $default = \null)
+        protected final function multidimensional_get($root, $keys, $default_value = \null)
         {
         }
         /**
@@ -21537,11 +21591,11 @@ namespace {
          *
          * @since 3.9.0
          *
-         * @param string $name    Post value.
-         * @param mixed  $default Default post value.
+         * @param string $name          Post value.
+         * @param mixed  $default_value Default post value.
          * @return mixed Unslashed post value or default value.
          */
-        protected function get_post_value($name, $default = \null)
+        protected function get_post_value($name, $default_value = \null)
         {
         }
         /**
@@ -22254,11 +22308,11 @@ namespace {
          *
          * @since 4.2.0
          *
-         * @param string $option_name Option name.
-         * @param mixed  $default     Optional. Default value to return if the option does not exist. Default false.
+         * @param string $option_name   Option name.
+         * @param mixed  $default_value Optional. Default value to return if the option does not exist. Default false.
          * @return mixed Value set for the option.
          */
-        protected function get_captured_option($option_name, $default = \false)
+        protected function get_captured_option($option_name, $default_value = \false)
         {
         }
         /**
@@ -22407,7 +22461,7 @@ namespace {
          * Supported time-related parameter keys.
          *
          * @since 4.1.0
-         * @var array
+         * @var string[]
          */
         public $time_keys = array('after', 'before', 'year', 'month', 'monthnum', 'week', 'w', 'dayofyear', 'day', 'dayofweek', 'dayofweek_iso', 'hour', 'minute', 'second');
         /**
@@ -23049,7 +23103,17 @@ namespace {
          * @since 3.1.0
          *
          * @param array $args Optional. Accepts 'pagenum' and 's' (search) arguments.
-         * @return array|false Results.
+         * @return array|false $results {
+         *     An array of associative arrays of query results, false if there are none.
+         *
+         *     @type array ...$0 {
+         *         @type int    $ID        Post ID.
+         *         @type string $title     The trimmed, escaped post title.
+         *         @type string $permalink Post permalink.
+         *         @type string $info      A 'Y/m/d'-formatted date for 'post' post type,
+         *                                 the 'singular_name' post type label otherwise.
+         *     }
+         * }
          */
         public static function wp_link_query($args = array())
         {
@@ -23094,7 +23158,7 @@ namespace {
         {
         }
         /**
-         * Process the [embed] shortcode.
+         * Processes the [embed] shortcode.
          *
          * Since the [embed] shortcode needs to be run earlier than other shortcodes,
          * this function removes all existing shortcodes, registers the [embed] shortcode,
@@ -23102,8 +23166,8 @@ namespace {
          *
          * @global array $shortcode_tags
          *
-         * @param string $content Content to parse
-         * @return string Content with shortcode parsed
+         * @param string $content Content to parse.
+         * @return string Content with shortcode parsed.
          */
         public function run_shortcode($content)
         {
@@ -23184,7 +23248,7 @@ namespace {
         {
         }
         /**
-         * Delete all oEmbed caches. Unused by core as of 4.0.0.
+         * Deletes all oEmbed caches. Unused by core as of 4.0.0.
          *
          * @param int $post_ID Post ID to delete the caches for.
          */
@@ -23213,10 +23277,10 @@ namespace {
         /**
          * Callback function for WP_Embed::autoembed().
          *
-         * @param array $match A regex match array.
+         * @param array $matches A regex match array.
          * @return string The embed HTML on success, otherwise the original URL.
          */
-        public function autoembed_callback($match)
+        public function autoembed_callback($matches)
         {
         }
         /**
@@ -23229,7 +23293,7 @@ namespace {
         {
         }
         /**
-         * Find the oEmbed cache post ID for a given cache key.
+         * Finds the oEmbed cache post ID for a given cache key.
          *
          * @since 4.9.0
          *
@@ -23324,7 +23388,7 @@ namespace {
          * @since 2.1.0
          *
          * @param string|int $code Optional. Retrieve messages matching code, if exists.
-         * @return array Error strings on success, or empty array if there are none.
+         * @return string[] Error strings on success, or empty array if there are none.
          */
         public function get_error_messages($code = '')
         {
@@ -23477,7 +23541,8 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @return array|null Error that was triggered, or null if no error received or if the error should not be handled.
+         * @return array|null Error information returned by `error_get_last()`, or null
+         *                    if none was recorded or the error should not be handled.
          */
         protected function detect_error()
         {
@@ -23488,7 +23553,7 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @param array $error Error information retrieved from error_get_last().
+         * @param array $error Error information retrieved from `error_get_last()`.
          * @return bool Whether WordPress should handle this error.
          */
         protected function should_handle_error($error)
@@ -24410,7 +24475,7 @@ namespace {
          *
          * Warning: Magic numbers within. Due to the potential different formats that the compressed
          * data may be returned in, some "magic offsets" are needed to ensure proper decompression
-         * takes place. For a simple progmatic way to determine the magic offset in use, see:
+         * takes place. For a simple pragmatic way to determine the magic offset in use, see:
          * https://core.trac.wordpress.org/ticket/18273
          *
          * @since 2.8.1
@@ -25157,7 +25222,7 @@ namespace {
          *
          * @param resource $stream The PHP Stream which the SSL request is being made over
          * @param string   $host   The hostname being requested
-         * @return bool If the cerficiate presented in $stream is valid for $host
+         * @return bool If the certificate presented in $stream is valid for $host
          */
         public static function verify_ssl_certificate($stream, $host)
         {
@@ -25307,7 +25372,7 @@ namespace {
          *     @type string       $sslcertificates     Absolute path to an SSL certificate .crt file.
          *                                             Default ABSPATH . WPINC . '/certificates/ca-bundle.crt'.
          *     @type bool         $stream              Whether to stream to a file. If set to true and no filename was
-         *                                             given, it will be droped it in the WP temp dir and its name will
+         *                                             given, it will be dropped it in the WP temp dir and its name will
          *                                             be set using the basename of the URL. Default false.
          *     @type string       $filename            Filename of the file to write to when streaming. $stream must be
          *                                             set to true. Default null.
@@ -25443,7 +25508,7 @@ namespace {
          *
          * @since 2.7.0
          *
-         * @param string $str_response The full response string.
+         * @param string $response The full response string.
          * @return array {
          *     Array with response headers and body.
          *
@@ -25451,7 +25516,7 @@ namespace {
          *     @type string $body    HTTP response body.
          * }
          */
-        public static function processResponse($str_response)
+        public static function processResponse($response)
         {
         }
         /**
@@ -25694,7 +25759,7 @@ namespace {
          * @param array $sizes {
          *     An array of image size arrays. Default sizes are 'small', 'medium', 'large'.
          *
-         *     @type array $size {
+         *     @type array ...$0 {
          *         @type int  $width  Image width.
          *         @type int  $height Image height.
          *         @type bool $crop   Optional. Whether to crop the image. Default false.
@@ -25866,11 +25931,11 @@ namespace {
          * @since 3.5.0
          *
          * @param string   $filename
-         * @param callable $function
+         * @param callable $callback
          * @param array    $arguments
          * @return bool
          */
-        protected function make_image($filename, $function, $arguments)
+        protected function make_image($filename, $callback, $arguments)
         {
         }
         /**
@@ -26013,7 +26078,7 @@ namespace {
          *     If one of the two is set to null, the resize will
          *     maintain aspect ratio according to the source image.
          *
-         *     @type array $size {
+         *     @type array ...$0 {
          *         Array of height, width values, and whether to crop.
          *
          *         @type int  $width  Image width. Optional if `$height` is specified.
@@ -26125,11 +26190,11 @@ namespace {
          * @since 3.5.0
          *
          * @param string   $filename
-         * @param callable $function
+         * @param callable $callback
          * @param array    $arguments
          * @return bool
          */
-        protected function make_image($filename, $function, $arguments)
+        protected function make_image($filename, $callback, $arguments)
         {
         }
     }
@@ -26269,7 +26334,7 @@ namespace {
          *     If one of the two is set to null, the resize will
          *     maintain aspect ratio according to the provided dimension.
          *
-         *     @type array $size {
+         *     @type array ...$0 {
          *         Array of height, width values, and whether to crop.
          *
          *         @type int  $width  Image width. Optional if `$height` is specified.
@@ -26466,7 +26531,7 @@ namespace {
          * Temporary arguments for sorting.
          *
          * @since 4.7.0
-         * @var array
+         * @var string[]
          */
         private $orderby = array();
         /**
@@ -26728,7 +26793,7 @@ namespace {
          * Stores the translated strings for the full weekday names.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $weekday;
         /**
@@ -26740,35 +26805,35 @@ namespace {
          * @see WP_Locale::init() for how to handle the hack.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $weekday_initial;
         /**
          * Stores the translated strings for the abbreviated weekday names.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $weekday_abbrev;
         /**
          * Stores the translated strings for the full month names.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $month;
         /**
          * Stores the translated strings for the month names in genitive case, if the locale specifies.
          *
          * @since 4.4.0
-         * @var array
+         * @var string[]
          */
         public $month_genitive;
         /**
          * Stores the translated strings for the abbreviated month names.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $month_abbrev;
         /**
@@ -26777,7 +26842,7 @@ namespace {
          * Also the capitalized versions.
          *
          * @since 2.1.0
-         * @var array
+         * @var string[]
          */
         public $meridiem;
         /**
@@ -26796,6 +26861,13 @@ namespace {
          * @var array
          */
         public $number_format;
+        /**
+         * The separator string used for localizing list item separator.
+         *
+         * @since 6.0.0
+         * @var string
+         */
+        public $list_item_separator;
         /**
          * Constructor which calls helper methods to set up object variables.
          *
@@ -26820,7 +26892,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the full translated weekday word.
+         * Retrieves the full translated weekday word.
          *
          * Week starts on translated Sunday and can be fetched
          * by using 0 (zero). So the week starts with 0 (zero)
@@ -26835,7 +26907,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the translated weekday initial.
+         * Retrieves the translated weekday initial.
          *
          * The weekday initial is retrieved by the translated
          * full weekday word. When translating the weekday initial
@@ -26851,7 +26923,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the translated weekday abbreviation.
+         * Retrieves the translated weekday abbreviation.
          *
          * The weekday abbreviation is retrieved by the translated
          * full weekday word.
@@ -26865,7 +26937,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the full translated month by month number.
+         * Retrieves the full translated month by month number.
          *
          * The $month_number parameter has to be a string
          * because it must have the '0' in front of any number
@@ -26884,7 +26956,7 @@ namespace {
         {
         }
         /**
-         * Retrieve translated version of month abbreviation string.
+         * Retrieves translated version of month abbreviation string.
          *
          * The $month_name parameter is expected to be the translated or
          * translatable version of the month.
@@ -26898,7 +26970,7 @@ namespace {
         {
         }
         /**
-         * Retrieve translated version of meridiem string.
+         * Retrieves translated version of meridiem string.
          *
          * The $meridiem parameter is expected to not be translated.
          *
@@ -26938,7 +27010,7 @@ namespace {
         {
         }
         /**
-         * Register date/time format strings for general POT.
+         * Registers date/time format strings for general POT.
          *
          * Private, unused method to add some date/time formats translated
          * on wp-admin/options-general.php to the general POT that would
@@ -26947,6 +27019,16 @@ namespace {
          * @since 3.6.0
          */
         public function _strings_for_pot()
+        {
+        }
+        /**
+         * Retrieves the localized list item separator.
+         *
+         * @since 6.0.0
+         *
+         * @return string Localized list item separator.
+         */
+        public function get_list_item_separator()
         {
         }
     }
@@ -27639,11 +27721,11 @@ namespace {
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string   $string  Search string.
+         * @param string   $search  Search string.
          * @param string[] $columns Array of columns to search.
          * @return string Search SQL.
          */
-        protected function get_search_sql($string, $columns)
+        protected function get_search_sql($search, $columns)
         {
         }
         /**
@@ -27982,6 +28064,18 @@ namespace {
         {
         }
         /**
+         * Serves as a utility function to determine whether a key exists in the cache.
+         *
+         * @since 3.4.0
+         *
+         * @param int|string $key   Cache key to check for existence.
+         * @param string     $group Cache group for the key existence check.
+         * @return bool Whether the key exists in the cache for the given group.
+         */
+        protected function _exists($key, $group)
+        {
+        }
+        /**
          * Adds data to the cache if it doesn't already exist.
          *
          * @since 2.0.0
@@ -27993,58 +28087,80 @@ namespace {
          * @param int|string $key    What to call the contents in the cache.
          * @param mixed      $data   The contents to store in the cache.
          * @param string     $group  Optional. Where to group the cache contents. Default 'default'.
-         * @param int        $expire Optional. When to expire the cache contents. Default 0 (no expiration).
+         * @param int        $expire Optional. When to expire the cache contents, in seconds.
+         *                           Default 0 (no expiration).
          * @return bool True on success, false if cache key and group already exist.
          */
         public function add($key, $data, $group = 'default', $expire = 0)
         {
         }
         /**
-         * Sets the list of global cache groups.
+         * Adds multiple values to the cache in one call.
          *
-         * @since 3.0.0
+         * @since 6.0.0
          *
-         * @param string|string[] $groups List of groups that are global.
+         * @param array  $data   Array of keys and values to be added.
+         * @param string $group  Optional. Where the cache contents are grouped. Default empty.
+         * @param int    $expire Optional. When to expire the cache contents, in seconds.
+         *                       Default 0 (no expiration).
+         * @return bool[] Array of return values, grouped by key. Each value is either
+         *                true on success, or false if cache key and group already exist.
          */
-        public function add_global_groups($groups)
+        public function add_multiple(array $data, $group = '', $expire = 0)
         {
         }
         /**
-         * Decrements numeric cache item's value.
-         *
-         * @since 3.3.0
-         *
-         * @param int|string $key    The cache key to decrement.
-         * @param int        $offset Optional. The amount by which to decrement the item's value. Default 1.
-         * @param string     $group  Optional. The group the key is in. Default 'default'.
-         * @return int|false The item's new value on success, false on failure.
-         */
-        public function decr($key, $offset = 1, $group = 'default')
-        {
-        }
-        /**
-         * Removes the contents of the cache key in the group.
-         *
-         * If the cache key does not exist in the group, then nothing will happen.
+         * Replaces the contents in the cache, if contents already exist.
          *
          * @since 2.0.0
          *
-         * @param int|string $key        What the contents in the cache are called.
-         * @param string     $group      Optional. Where the cache contents are grouped. Default 'default'.
-         * @param bool       $deprecated Optional. Unused. Default false.
-         * @return bool False if the contents weren't deleted and true on success.
+         * @see WP_Object_Cache::set()
+         *
+         * @param int|string $key    What to call the contents in the cache.
+         * @param mixed      $data   The contents to store in the cache.
+         * @param string     $group  Optional. Where to group the cache contents. Default 'default'.
+         * @param int        $expire Optional. When to expire the cache contents, in seconds.
+         *                           Default 0 (no expiration).
+         * @return bool True if contents were replaced, false if original value does not exist.
          */
-        public function delete($key, $group = 'default', $deprecated = \false)
+        public function replace($key, $data, $group = 'default', $expire = 0)
         {
         }
         /**
-         * Clears the object cache of all data.
+         * Sets the data contents into the cache.
+         *
+         * The cache contents are grouped by the $group parameter followed by the
+         * $key. This allows for duplicate IDs in unique groups. Therefore, naming of
+         * the group should be used with care and should follow normal function
+         * naming guidelines outside of core WordPress usage.
+         *
+         * The $expire parameter is not used, because the cache will automatically
+         * expire for each time a page is accessed and PHP finishes. The method is
+         * more for cache plugins which use files.
          *
          * @since 2.0.0
          *
+         * @param int|string $key    What to call the contents in the cache.
+         * @param mixed      $data   The contents to store in the cache.
+         * @param string     $group  Optional. Where to group the cache contents. Default 'default'.
+         * @param int        $expire Optional. Not used.
          * @return true Always returns true.
          */
-        public function flush()
+        public function set($key, $data, $group = 'default', $expire = 0)
+        {
+        }
+        /**
+         * Sets multiple values to the cache in one call.
+         *
+         * @since 6.0.0
+         *
+         * @param array  $data   Array of key and value to be set.
+         * @param string $group  Optional. Where the cache contents are grouped. Default empty.
+         * @param int    $expire Optional. When to expire the cache contents, in seconds.
+         *                       Default 0 (no expiration).
+         * @return bool[] Array of return values, grouped by key. Each value is always true.
+         */
+        public function set_multiple(array $data, $group = '', $expire = 0)
         {
         }
         /**
@@ -28078,9 +28194,38 @@ namespace {
          * @param string $group Optional. Where the cache contents are grouped. Default 'default'.
          * @param bool   $force Optional. Whether to force an update of the local cache
          *                      from the persistent cache. Default false.
-         * @return array Array of values organized into groups.
+         * @return array Array of return values, grouped by key. Each value is either
+         *               the cache contents on success, or false on failure.
          */
         public function get_multiple($keys, $group = 'default', $force = \false)
+        {
+        }
+        /**
+         * Removes the contents of the cache key in the group.
+         *
+         * If the cache key does not exist in the group, then nothing will happen.
+         *
+         * @since 2.0.0
+         *
+         * @param int|string $key        What the contents in the cache are called.
+         * @param string     $group      Optional. Where the cache contents are grouped. Default 'default'.
+         * @param bool       $deprecated Optional. Unused. Default false.
+         * @return bool True on success, false if the contents were not deleted.
+         */
+        public function delete($key, $group = 'default', $deprecated = \false)
+        {
+        }
+        /**
+         * Deletes multiple values from the cache in one call.
+         *
+         * @since 6.0.0
+         *
+         * @param array  $keys  Array of keys to be deleted.
+         * @param string $group Optional. Where the cache contents are grouped. Default empty.
+         * @return bool[] Array of return values, grouped by key. Each value is either
+         *                true on success, or false if the contents were not deleted.
+         */
+        public function delete_multiple(array $keys, $group = '')
         {
         }
         /**
@@ -28088,8 +28233,9 @@ namespace {
          *
          * @since 3.3.0
          *
-         * @param int|string $key    The cache key to increment
-         * @param int        $offset Optional. The amount by which to increment the item's value. Default 1.
+         * @param int|string $key    The cache key to increment.
+         * @param int        $offset Optional. The amount by which to increment the item's value.
+         *                           Default 1.
          * @param string     $group  Optional. The group the key is in. Default 'default'.
          * @return int|false The item's new value on success, false on failure.
          */
@@ -28097,64 +28243,37 @@ namespace {
         {
         }
         /**
-         * Replaces the contents in the cache, if contents already exist.
+         * Decrements numeric cache item's value.
          *
-         * @since 2.0.0
+         * @since 3.3.0
          *
-         * @see WP_Object_Cache::set()
-         *
-         * @param int|string $key    What to call the contents in the cache.
-         * @param mixed      $data   The contents to store in the cache.
-         * @param string     $group  Optional. Where to group the cache contents. Default 'default'.
-         * @param int        $expire Optional. When to expire the cache contents. Default 0 (no expiration).
-         * @return bool False if not exists, true if contents were replaced.
+         * @param int|string $key    The cache key to decrement.
+         * @param int        $offset Optional. The amount by which to decrement the item's value.
+         *                           Default 1.
+         * @param string     $group  Optional. The group the key is in. Default 'default'.
+         * @return int|false The item's new value on success, false on failure.
          */
-        public function replace($key, $data, $group = 'default', $expire = 0)
+        public function decr($key, $offset = 1, $group = 'default')
         {
         }
         /**
-         * Resets cache keys.
+         * Clears the object cache of all data.
+         *
+         * @since 2.0.0
+         *
+         * @return true Always returns true.
+         */
+        public function flush()
+        {
+        }
+        /**
+         * Sets the list of global cache groups.
          *
          * @since 3.0.0
          *
-         * @deprecated 3.5.0 Use switch_to_blog()
-         * @see switch_to_blog()
+         * @param string|string[] $groups List of groups that are global.
          */
-        public function reset()
-        {
-        }
-        /**
-         * Sets the data contents into the cache.
-         *
-         * The cache contents are grouped by the $group parameter followed by the
-         * $key. This allows for duplicate IDs in unique groups. Therefore, naming of
-         * the group should be used with care and should follow normal function
-         * naming guidelines outside of core WordPress usage.
-         *
-         * The $expire parameter is not used, because the cache will automatically
-         * expire for each time a page is accessed and PHP finishes. The method is
-         * more for cache plugins which use files.
-         *
-         * @since 2.0.0
-         *
-         * @param int|string $key    What to call the contents in the cache.
-         * @param mixed      $data   The contents to store in the cache.
-         * @param string     $group  Optional. Where to group the cache contents. Default 'default'.
-         * @param int        $expire Not Used.
-         * @return true Always returns true.
-         */
-        public function set($key, $data, $group = 'default', $expire = 0)
-        {
-        }
-        /**
-         * Echoes the stats of the caching.
-         *
-         * Gives the cache hits, and cache misses. Also prints every cached group,
-         * key and the data.
-         *
-         * @since 2.0.0
-         */
-        public function stats()
+        public function add_global_groups($groups)
         {
         }
         /**
@@ -28170,15 +28289,25 @@ namespace {
         {
         }
         /**
-         * Serves as a utility function to determine whether a key exists in the cache.
+         * Resets cache keys.
          *
-         * @since 3.4.0
+         * @since 3.0.0
          *
-         * @param int|string $key   Cache key to check for existence.
-         * @param string     $group Cache group for the key existence check.
-         * @return bool Whether the key exists in the cache for the given group.
+         * @deprecated 3.5.0 Use WP_Object_Cache::switch_to_blog()
+         * @see switch_to_blog()
          */
-        protected function _exists($key, $group)
+        public function reset()
+        {
+        }
+        /**
+         * Echoes the stats of the caching.
+         *
+         * Gives the cache hits, and cache misses. Also prints every cached group,
+         * key and the data.
+         *
+         * @since 2.0.0
+         */
+        public function stats()
         {
         }
     }
@@ -28534,11 +28663,11 @@ namespace {
          *
          * @param string $extension Plugin or theme directory name.
          * @param array  $error     {
-         *     Error that was triggered.
+         *     Error information returned by `error_get_last()`.
          *
-         *     @type string $type    The error type.
+         *     @type int    $type    The error type.
          *     @type string $file    The name of the file in which the error occurred.
-         *     @type string $line    The line number in which the error occurred.
+         *     @type int    $line    The line number in which the error occurred.
          *     @type string $message The error message.
          * }
          * @return bool True on success, false on failure.
@@ -28573,7 +28702,11 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @return array Associative array of extension slugs to the error recorded.
+         * @return array {
+         *     Associative array of errors keyed by extension slug.
+         *
+         *     @type array ...$0 Error information returned by `error_get_last()`.
+         * }
          */
         public function get_all()
         {
@@ -28652,6 +28785,13 @@ namespace {
          */
         public $labels;
         /**
+         * Default labels.
+         *
+         * @since 6.0.0
+         * @var (string|null)[][] $default_labels
+         */
+        protected static $default_labels = array();
+        /**
          * A short descriptive summary of what the post type is.
          *
          * Default empty.
@@ -28695,6 +28835,7 @@ namespace {
          * Whether queries can be performed on the front end for the post type as part of `parse_request()`.
          *
          * Endpoints would include:
+         *
          * - `?post_type={post_type_key}`
          * - `?{post_type_key}={single_post_slug}`
          * - `?{post_type_query_var}={single_post_slug}`
@@ -29093,6 +29234,24 @@ namespace {
          *                                 is set not to show in rest.
          */
         public function get_rest_controller()
+        {
+        }
+        /**
+         * Returns the default labels for post types.
+         *
+         * @since 6.0.0
+         *
+         * @return (string|null)[][] The default labels for post types.
+         */
+        public static function get_default_labels()
+        {
+        }
+        /**
+         * Resets the cache for the default labels.
+         *
+         * @since 6.0.0
+         */
+        public static function reset_default_labels()
         {
         }
     }
@@ -29790,10 +29949,10 @@ namespace {
          * @since 2.1.0
          * @since 4.5.0 Removed the `comments_popup` public query variable.
          *
-         * @param array $array Defined query variables.
+         * @param array $query_vars Defined query variables.
          * @return array Complete query variables with undefined ones filled in empty.
          */
-        public function fill_query_vars($array)
+        public function fill_query_vars($query_vars)
         {
         }
         /**
@@ -30050,13 +30209,13 @@ namespace {
          * Retrieves the value of a query variable.
          *
          * @since 1.5.0
-         * @since 3.9.0 The `$default` argument was introduced.
+         * @since 3.9.0 The `$default_value` argument was introduced.
          *
-         * @param string $query_var Query variable key.
-         * @param mixed  $default   Optional. Value to return if the query variable is not set. Default empty string.
+         * @param string $query_var     Query variable key.
+         * @param mixed  $default_value Optional. Value to return if the query variable is not set. Default empty string.
          * @return mixed Contents of the query variable.
          */
-        public function get($query_var, $default = '')
+        public function get($query_var, $default_value = '')
         {
         }
         /**
@@ -30890,7 +31049,7 @@ namespace {
          * @since 5.2.0
          *
          * @param int   $rate_limit Number of seconds before another email can be sent.
-         * @param array $error      Error details from {@see error_get_last()}
+         * @param array $error      Error details from `error_get_last()`.
          * @param array $extension {
          *     The extension that caused the error.
          *
@@ -30918,8 +31077,13 @@ namespace {
          * @since 5.2.0
          *
          * @param int   $rate_limit Number of seconds before another email can be sent.
-         * @param array $error      Error details from {@see error_get_last()}
-         * @param array $extension  Extension that caused the error.
+         * @param array $error      Error details from `error_get_last()`.
+         * @param array $extension {
+         *     The extension that caused the error.
+         *
+         *     @type string $slug The extension slug. The directory of the plugin or theme.
+         *     @type string $type The extension type. Either 'plugin' or 'theme'.
+         * }
          * @return bool Whether the email was sent successfully.
          */
         private function send_recovery_mode_email($rate_limit, $error, $extension)
@@ -30940,7 +31104,12 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @param array $extension The extension that caused the error.
+         * @param array $extension {
+         *     The extension that caused the error.
+         *
+         *     @type string $slug The extension slug. The directory of the plugin or theme.
+         *     @type string $type The extension type. Either 'plugin' or 'theme'.
+         * }
          * @return string Message about which extension caused the error.
          */
         private function get_cause($extension)
@@ -30951,7 +31120,12 @@ namespace {
          *
          * @since 5.3.0
          *
-         * @param array $extension The extension that caused the error.
+         * @param array $extension {
+         *     The extension that caused the error.
+         *
+         *     @type string $slug The extension slug. The directory of the plugin or theme.
+         *     @type string $type The extension type. Either 'plugin' or 'theme'.
+         * }
          * @return array|false A plugin array {@see get_plugins()} or `false` if no plugin was found.
          */
         private function get_plugin($extension)
@@ -30962,7 +31136,12 @@ namespace {
          *
          * @since 5.3.0
          *
-         * @param array $extension The extension that caused the error.
+         * @param array $extension {
+         *     The extension that caused the error.
+         *
+         *     @type string $slug The extension slug. The directory of the plugin or theme.
+         *     @type string $type The extension type. Either 'plugin' or 'theme'.
+         * }
          * @return array An associative array of debug information.
          */
         private function get_debug($extension)
@@ -31128,7 +31307,7 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @global string $pagenow
+         * @global string $pagenow The filename of the current screen.
          *
          * @param int $ttl Number of seconds the link should be valid for.
          */
@@ -31268,7 +31447,7 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @param array $error Error details from {@see error_get_last()}
+         * @param array $error Error details from `error_get_last()`.
          * @return true|WP_Error True if the error was handled and headers have already been sent.
          *                       Or the request will exit to try and catch multiple errors at once.
          *                       WP_Error if an error occurred preventing it from being handled.
@@ -31339,7 +31518,7 @@ namespace {
          *
          * @global array $wp_theme_directories
          *
-         * @param array $error Error that was triggered.
+         * @param array $error Error details from `error_get_last()`.
          * @return array|false {
          *     Extension details.
          *
@@ -31366,7 +31545,7 @@ namespace {
          *
          * @since 5.2.0
          *
-         * @param array $error Error that was triggered.
+         * @param array $error Error details from `error_get_last()`.
          * @return bool True if the error was stored successfully, false otherwise.
          */
         protected function store_error($error)
@@ -31636,7 +31815,7 @@ namespace {
          * Additional tags can be added with add_rewrite_tag().
          *
          * @since 1.5.0
-         * @var array
+         * @var string[]
          */
         public $rewritecode = array('%year%', '%monthnum%', '%day%', '%hour%', '%minute%', '%second%', '%postname%', '%post_id%', '%author%', '%pagename%', '%search%');
         /**
@@ -31644,21 +31823,21 @@ namespace {
          * of rewrite tags, see WP_Rewrite::$rewritecode.
          *
          * @since 1.5.0
-         * @var array
+         * @var string[]
          */
         public $rewritereplace = array('([0-9]{4})', '([0-9]{1,2})', '([0-9]{1,2})', '([0-9]{1,2})', '([0-9]{1,2})', '([0-9]{1,2})', '([^/]+)', '([0-9]+)', '([^/]+)', '([^/]+?)', '(.+)');
         /**
          * Query variables that rewrite tags map to, see WP_Rewrite::$rewritecode.
          *
          * @since 1.5.0
-         * @var array
+         * @var string[]
          */
         public $queryreplace = array('year=', 'monthnum=', 'day=', 'hour=', 'minute=', 'second=', 'name=', 'p=', 'author_name=', 'pagename=', 's=');
         /**
          * Supported default feeds.
          *
          * @since 1.5.0
-         * @var array
+         * @var string[]
          */
         public $feeds = array('feed', 'rdf', 'rss', 'rss2', 'atom');
         /**
@@ -33109,7 +33288,7 @@ namespace {
      * @since 4.7.0
      */
     /**
-     * Core class used to implement SimpliePie feed sanitization.
+     * Core class used to implement SimplePie feed sanitization.
      *
      * Extends the SimplePie_Sanitize class to use KSES, because
      * we cannot universally count on DOMDocument being available.
@@ -33259,6 +33438,11 @@ namespace {
          *                                                   - 'path_length'
          *                                                   - 'site__in'
          *                                                   - 'network__in'
+         *                                                   - 'deleted'
+         *                                                   - 'mature'
+         *                                                   - 'spam'
+         *                                                   - 'archived'
+         *                                                   - 'public'
          *                                                   - false, an empty array, or 'none' to disable `ORDER BY` clause.
          *                                                   Default 'id'.
          *     @type string          $order                  How to order retrieved sites. Accepts 'ASC', 'DESC'. Default 'ASC'.
@@ -33369,11 +33553,11 @@ namespace {
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string   $string  Search string.
+         * @param string   $search  Search string.
          * @param string[] $columns Array of columns to search.
          * @return string Search SQL.
          */
-        protected function get_search_sql($string, $columns)
+        protected function get_search_sql($search, $columns)
         {
         }
         /**
@@ -33937,6 +34121,13 @@ namespace {
          */
         public $labels;
         /**
+         * Default labels.
+         *
+         * @since 6.0.0
+         * @var (string|null)[][] $default_labels
+         */
+        protected static $default_labels = array();
+        /**
          * A short descriptive summary of what the taxonomy is for.
          *
          * @since 4.7.0
@@ -34026,7 +34217,7 @@ namespace {
          * An array of object types this taxonomy is registered for.
          *
          * @since 4.7.0
-         * @var array
+         * @var string[]
          */
         public $object_type = \null;
         /**
@@ -34154,8 +34345,8 @@ namespace {
          *
          * @since 4.7.0
          *
-         * @param array|string $object_type Name of the object type for the taxonomy object.
-         * @param array|string $args        Array or query string of arguments for registering a taxonomy.
+         * @param string|string[] $object_type Name or array of names of the object types for the taxonomy.
+         * @param array|string    $args        Array or query string of arguments for registering a taxonomy.
          */
         public function set_props($object_type, $args)
         {
@@ -34207,6 +34398,24 @@ namespace {
          *                                 is set not to show in rest.
          */
         public function get_rest_controller()
+        {
+        }
+        /**
+         * Returns the default labels for taxonomies.
+         *
+         * @since 6.0.0
+         *
+         * @return (string|null)[][] The default labels for taxonomies.
+         */
+        public static function get_default_labels()
+        {
+        }
+        /**
+         * Resets the cache for the default labels.
+         *
+         * @since 6.0.0
+         */
+        public static function reset_default_labels()
         {
         }
     }
@@ -34470,6 +34679,19 @@ namespace {
         {
         }
         /**
+         * Format response depending on field requested.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_Term[] $term_objects Array of term objects.
+         * @param string    $_fields      Field to format.
+         *
+         * @return WP_Term[]|int[]|string[] Array of terms / strings / ints depending on field requested.
+         */
+        protected function format_terms($term_objects, $_fields)
+        {
+        }
+        /**
          * Generate the ORDER BY clause for an 'orderby' param that is potentially related to a meta query.
          *
          * @since 4.6.0
@@ -34498,10 +34720,10 @@ namespace {
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string $string
-         * @return string
+         * @param string $search Search string.
+         * @return string Search SQL.
          */
-        protected function get_search_sql($string)
+        protected function get_search_sql($search)
         {
         }
         /**
@@ -34511,10 +34733,10 @@ namespace {
          *
          * @since 4.9.8
          *
-         * @param array $term_ids Term IDs.
-         * @return array
+         * @param Object[]|int[] $terms List of objects or term ids.
+         * @return WP_Term[] Array of `WP_Term` objects.
          */
-        protected function populate_terms($term_ids)
+        protected function populate_terms($terms)
         {
         }
     }
@@ -35248,7 +35470,7 @@ namespace {
         {
         }
         /**
-         * Return core's origin config.
+         * Returns core's origin config.
          *
          * @since 5.8.0
          *
@@ -35263,27 +35485,33 @@ namespace {
          * Data from theme.json will be backfilled from existing
          * theme supports, if any. Note that if the same data
          * is present in theme.json and in theme supports,
-         * the theme.json takes precendence.
+         * the theme.json takes precedence.
          *
          * @since 5.8.0
          * @since 5.9.0 Theme supports have been inlined and the `$theme_support_data` argument removed.
+         * @since 6.0.0 Added an `$options` parameter to allow the theme data to be returned without theme supports.
          *
          * @param array $deprecated Deprecated. Not used.
+         * @param array $options {
+         *     Options arguments.
+         *
+         *     @type bool $with_supports Whether to include theme supports in the data. Default true.
+         * }
          * @return WP_Theme_JSON Entity that holds theme data.
          */
-        public static function get_theme_data($deprecated = array())
+        public static function get_theme_data($deprecated = array(), $options = array())
         {
         }
         /**
          * Returns the custom post type that contains the user's origin config
-         * for the current theme or a void array if none are found.
+         * for the active theme or a void array if none are found.
          *
          * This can also create and return a new draft custom post type.
          *
          * @since 5.9.0
          *
          * @param WP_Theme $theme              The theme object. If empty, it
-         *                                     defaults to the current theme.
+         *                                     defaults to the active theme.
          * @param bool     $create_post        Optional. Whether a new custom post
          *                                     type should be created if none are
          *                                     found. Default false.
@@ -35312,12 +35540,13 @@ namespace {
          * default, theme, and custom. The custom's has higher priority
          * than the theme's, and the theme's higher than default's.
          *
-         * Unlike the getters {@link get_core_data},
-         * {@link get_theme_data}, and {@link get_user_data},
-         * this method returns data after it has been merged
-         * with the previous origins. This means that if the same piece of data
-         * is declared in different origins (user, theme, and core),
-         * the last origin overrides the previous.
+         * Unlike the getters
+         * {@link https://developer.wordpress.org/reference/classes/wp_theme_json_resolver/get_core_data/ get_core_data},
+         * {@link https://developer.wordpress.org/reference/classes/wp_theme_json_resolver/get_theme_data/ get_theme_data},
+         * and {@link https://developer.wordpress.org/reference/classes/wp_theme_json_resolver/get_user_data/ get_user_data},
+         * this method returns data after it has been merged with the previous origins.
+         * This means that if the same piece of data is declared in different origins
+         * (user, theme, and core), the last origin overrides the previous.
          *
          * For example, if the user has set a background color
          * for the paragraph block, and the theme has done it as well,
@@ -35346,7 +35575,7 @@ namespace {
         {
         }
         /**
-         * Whether the current theme has a theme.json file.
+         * Determines whether the active theme has a theme.json file.
          *
          * @since 5.8.0
          * @since 5.9.0 Added a check in the parent theme.
@@ -35379,6 +35608,16 @@ namespace {
          *              and `$i18n_schema` variables to reset.
          */
         public static function clean_cached_data()
+        {
+        }
+        /**
+         * Returns the style variations defined by the theme.
+         *
+         * @since 6.0.0
+         *
+         * @return array
+         */
+        public static function get_style_variations()
         {
         }
     }
@@ -35540,38 +35779,46 @@ namespace {
          *
          * This contains the necessary metadata to process them:
          *
-         * - path              => where to find the preset within the settings section
-         * - override          => whether a theme preset with the same slug as a default preset
-         *                        can override it
+         * - path             => Where to find the preset within the settings section.
+         * - prevent_override => Disables override of default presets by theme presets.
+         *                       The relationship between whether to override the defaults
+         *                       and whether the defaults are enabled is inverse:
+         *                         - If defaults are enabled  => theme presets should not be overriden
+         *                         - If defaults are disabled => theme presets should be overriden
+         *                       For example, a theme sets defaultPalette to false,
+         *                       making the default palette hidden from the user.
+         *                       In that case, we want all the theme presets to be present,
+         *                       so they should override the defaults by setting this false.
          * - use_default_names => whether to use the default names
-         * - value_key         => the key that represents the value
-         * - value_func        => optionally, instead of value_key, a function to generate
-         *                        the value that takes a preset as an argument
-         *                        (either value_key or value_func should be present)
-         * - css_vars          => template string to use in generating the CSS Custom Property.
-         *                        Example output: "--wp--preset--duotone--blue: <value>" will generate
-         *                        as many CSS Custom Properties as presets defined
-         *                        substituting the $slug for the slug's value for each preset value.
-         * - classes           => array containing a structure with the classes to
-         *                        generate for the presets, where for each array item
-         *                        the key is the class name and the value the property name.
-         *                        The "$slug" substring will be replaced by the slug of each preset.
-         *                        For example:
-         *                        'classes' => array(
-         *                           '.has-$slug-color'            => 'color',
-         *                           '.has-$slug-background-color' => 'background-color',
-         *                           '.has-$slug-border-color'     => 'border-color',
-         *                        )
-         * - properties        => array of CSS properties to be used by kses to
-         *                        validate the content of each preset
-         *                        by means of the remove_insecure_properties method.
+         * - value_key        => the key that represents the value
+         * - value_func       => optionally, instead of value_key, a function to generate
+         *                       the value that takes a preset as an argument
+         *                       (either value_key or value_func should be present)
+         * - css_vars         => template string to use in generating the CSS Custom Property.
+         *                       Example output: "--wp--preset--duotone--blue: <value>" will generate as many CSS Custom Properties as presets defined
+         *                       substituting the $slug for the slug's value for each preset value.
+         * - classes          => array containing a structure with the classes to
+         *                       generate for the presets, where for each array item
+         *                       the key is the class name and the value the property name.
+         *                       The "$slug" substring will be replaced by the slug of each preset.
+         *                       For example:
+         *                       'classes' => array(
+         *                         '.has-$slug-color'            => 'color',
+         *                         '.has-$slug-background-color' => 'background-color',
+         *                         '.has-$slug-border-color'     => 'border-color',
+         *                       )
+         * - properties       => array of CSS properties to be used by kses to
+         *                       validate the content of each preset
+         *                       by means of the remove_insecure_properties method.
          *
          * @since 5.8.0
          * @since 5.9.0 Added the `color.duotone` and `typography.fontFamilies` presets,
          *              `use_default_names` preset key, and simplified the metadata structure.
+         * @since 6.0.0 Replaced `override` with `prevent_override` and updated the
+         *              `prevent_overried` value for `color.duotone` to use `color.defaultDuotone`.
          * @var array
          */
-        const PRESETS_METADATA = array(array('path' => array('color', 'palette'), 'override' => array('color', 'defaultPalette'), 'use_default_names' => \false, 'value_key' => 'color', 'css_vars' => '--wp--preset--color--$slug', 'classes' => array('.has-$slug-color' => 'color', '.has-$slug-background-color' => 'background-color', '.has-$slug-border-color' => 'border-color'), 'properties' => array('color', 'background-color', 'border-color')), array('path' => array('color', 'gradients'), 'override' => array('color', 'defaultGradients'), 'use_default_names' => \false, 'value_key' => 'gradient', 'css_vars' => '--wp--preset--gradient--$slug', 'classes' => array('.has-$slug-gradient-background' => 'background'), 'properties' => array('background')), array('path' => array('color', 'duotone'), 'override' => \true, 'use_default_names' => \false, 'value_func' => 'wp_get_duotone_filter_property', 'css_vars' => '--wp--preset--duotone--$slug', 'classes' => array(), 'properties' => array('filter')), array('path' => array('typography', 'fontSizes'), 'override' => \true, 'use_default_names' => \true, 'value_key' => 'size', 'css_vars' => '--wp--preset--font-size--$slug', 'classes' => array('.has-$slug-font-size' => 'font-size'), 'properties' => array('font-size')), array('path' => array('typography', 'fontFamilies'), 'override' => \true, 'use_default_names' => \false, 'value_key' => 'fontFamily', 'css_vars' => '--wp--preset--font-family--$slug', 'classes' => array('.has-$slug-font-family' => 'font-family'), 'properties' => array('font-family')));
+        const PRESETS_METADATA = array(array('path' => array('color', 'palette'), 'prevent_override' => array('color', 'defaultPalette'), 'use_default_names' => \false, 'value_key' => 'color', 'css_vars' => '--wp--preset--color--$slug', 'classes' => array('.has-$slug-color' => 'color', '.has-$slug-background-color' => 'background-color', '.has-$slug-border-color' => 'border-color'), 'properties' => array('color', 'background-color', 'border-color')), array('path' => array('color', 'gradients'), 'prevent_override' => array('color', 'defaultGradients'), 'use_default_names' => \false, 'value_key' => 'gradient', 'css_vars' => '--wp--preset--gradient--$slug', 'classes' => array('.has-$slug-gradient-background' => 'background'), 'properties' => array('background')), array('path' => array('color', 'duotone'), 'prevent_override' => array('color', 'defaultDuotone'), 'use_default_names' => \false, 'value_func' => 'wp_get_duotone_filter_property', 'css_vars' => '--wp--preset--duotone--$slug', 'classes' => array(), 'properties' => array('filter')), array('path' => array('typography', 'fontSizes'), 'prevent_override' => \false, 'use_default_names' => \true, 'value_key' => 'size', 'css_vars' => '--wp--preset--font-size--$slug', 'classes' => array('.has-$slug-font-size' => 'font-size'), 'properties' => array('font-size')), array('path' => array('typography', 'fontFamilies'), 'prevent_override' => \false, 'use_default_names' => \false, 'value_key' => 'fontFamily', 'css_vars' => '--wp--preset--font-family--$slug', 'classes' => array('.has-$slug-font-family' => 'font-family'), 'properties' => array('font-family')));
         /**
          * Metadata for style properties.
          *
@@ -35606,7 +35853,7 @@ namespace {
          *              added the `customTemplates` and `templateParts` values.
          * @var string[]
          */
-        const VALID_TOP_LEVEL_KEYS = array('customTemplates', 'settings', 'styles', 'templateParts', 'version');
+        const VALID_TOP_LEVEL_KEYS = array('customTemplates', 'patterns', 'settings', 'styles', 'templateParts', 'version', 'title');
         /**
          * The valid properties under the settings key.
          *
@@ -35614,9 +35861,10 @@ namespace {
          * @since 5.9.0 Renamed from `ALLOWED_SETTINGS` to `VALID_SETTINGS`,
          *              added new properties for `border`, `color`, `spacing`,
          *              and `typography`, and renamed others according to the new schema.
+         * @since 6.0.0 Added `color.defaultDuotone`.
          * @var array
          */
-        const VALID_SETTINGS = array('appearanceTools' => \null, 'border' => array('color' => \null, 'radius' => \null, 'style' => \null, 'width' => \null), 'color' => array('background' => \null, 'custom' => \null, 'customDuotone' => \null, 'customGradient' => \null, 'defaultGradients' => \null, 'defaultPalette' => \null, 'duotone' => \null, 'gradients' => \null, 'link' => \null, 'palette' => \null, 'text' => \null), 'custom' => \null, 'layout' => array('contentSize' => \null, 'wideSize' => \null), 'spacing' => array('blockGap' => \null, 'margin' => \null, 'padding' => \null, 'units' => \null), 'typography' => array('customFontSize' => \null, 'dropCap' => \null, 'fontFamilies' => \null, 'fontSizes' => \null, 'fontStyle' => \null, 'fontWeight' => \null, 'letterSpacing' => \null, 'lineHeight' => \null, 'textDecoration' => \null, 'textTransform' => \null));
+        const VALID_SETTINGS = array('appearanceTools' => \null, 'border' => array('color' => \null, 'radius' => \null, 'style' => \null, 'width' => \null), 'color' => array('background' => \null, 'custom' => \null, 'customDuotone' => \null, 'customGradient' => \null, 'defaultDuotone' => \null, 'defaultGradients' => \null, 'defaultPalette' => \null, 'duotone' => \null, 'gradients' => \null, 'link' => \null, 'palette' => \null, 'text' => \null), 'custom' => \null, 'layout' => array('contentSize' => \null, 'wideSize' => \null), 'spacing' => array('blockGap' => \null, 'margin' => \null, 'padding' => \null, 'units' => \null), 'typography' => array('customFontSize' => \null, 'dropCap' => \null, 'fontFamilies' => \null, 'fontSizes' => \null, 'fontStyle' => \null, 'fontWeight' => \null, 'letterSpacing' => \null, 'lineHeight' => \null, 'textDecoration' => \null, 'textTransform' => \null));
         /**
          * The valid properties under the styles key.
          *
@@ -35634,6 +35882,13 @@ namespace {
          * @var string[]
          */
         const ELEMENTS = array('link' => 'a', 'h1' => 'h1', 'h2' => 'h2', 'h3' => 'h3', 'h4' => 'h4', 'h5' => 'h5', 'h6' => 'h6');
+        /**
+         * Options that settings.appearanceTools enables.
+         *
+         * @since 6.0.0
+         * @var array
+         */
+        const APPEARANCE_TOOLS_OPT_INS = array(array('border', 'color'), array('border', 'radius'), array('border', 'style'), array('border', 'width'), array('color', 'link'), array('spacing', 'blockGap'), array('spacing', 'margin'), array('spacing', 'padding'), array('typography', 'lineHeight'));
         /**
          * The latest version of the schema in use.
          *
@@ -35778,7 +36033,7 @@ namespace {
         {
         }
         /**
-         * Returns the page templates of the current theme.
+         * Returns the page templates of the active theme.
          *
          * @since 5.9.0
          *
@@ -35788,7 +36043,7 @@ namespace {
         {
         }
         /**
-         * Returns the template part data of current theme.
+         * Returns the template part data of active theme.
          *
          * @since 5.9.0
          *
@@ -36168,6 +36423,34 @@ namespace {
         {
         }
         /**
+         * For metadata values that can either be booleans or paths to booleans, gets the value.
+         *
+         * ```php
+         * $data = array(
+         *   'color' => array(
+         *     'defaultPalette' => true
+         *   )
+         * );
+         *
+         * static::get_metadata_boolean( $data, false );
+         * // => false
+         *
+         * static::get_metadata_boolean( $data, array( 'color', 'defaultPalette' ) );
+         * // => true
+         * ```
+         *
+         * @since 6.0.0
+         *
+         * @param array      $data    The data to inspect.
+         * @param bool|array $path    Boolean or path to a boolean.
+         * @param bool       $default Default value if the referenced path is missing.
+         *                            Default false.
+         * @return bool Value of boolean metadata.
+         */
+        protected static function get_metadata_boolean($data, $path, $default = \false)
+        {
+        }
+        /**
          * Merge new incoming data.
          *
          * @since 5.8.0
@@ -36193,10 +36476,11 @@ namespace {
          * Returns whether a presets should be overridden or not.
          *
          * @since 5.9.0
+         * @deprecated 6.0.0 Use {@see 'get_metadata_boolean'} instead.
          *
          * @param array      $theme_json The theme.json like structure to inspect.
-         * @param array      $path Path to inspect.
-         * @param bool|array $override Data to compute whether to override the preset.
+         * @param array      $path       Path to inspect.
+         * @param bool|array $override   Data to compute whether to override the preset.
          * @return boolean
          */
         protected static function should_override_preset($theme_json, $path, $override)
@@ -36317,6 +36601,30 @@ namespace {
         public static function get_from_editor_settings($settings)
         {
         }
+        /**
+         * Returns the current theme's wanted patterns(slugs) to be
+         * registered from Pattern Directory.
+         *
+         * @since 6.0.0
+         *
+         * @return string[]
+         */
+        public function get_patterns()
+        {
+        }
+        /**
+         * Returns a valid theme.json as provided by a theme.
+         *
+         * Unlike get_raw_data() this returns the presets flattened, as provided by a theme.
+         * This also uses appearanceTools instead of their opt-ins if all of them are true.
+         *
+         * @since 6.0.0
+         *
+         * @return array
+         */
+        public function get_data()
+        {
+        }
     }
     /**
      * WP_Theme Class
@@ -36341,7 +36649,7 @@ namespace {
          *
          * @since 3.4.0
          * @since 5.4.0 Added `Requires at least` and `Requires PHP` headers.
-         * @var array
+         * @var string[]
          */
         private static $file_headers = array('Name' => 'Theme Name', 'ThemeURI' => 'Theme URI', 'Description' => 'Description', 'Author' => 'Author', 'AuthorURI' => 'Author URI', 'Version' => 'Version', 'Template' => 'Template', 'Status' => 'Status', 'Tags' => 'Tags', 'TextDomain' => 'Text Domain', 'DomainPath' => 'Domain Path', 'RequiresWP' => 'Requires at least', 'RequiresPHP' => 'Requires PHP');
         /**
@@ -36357,14 +36665,15 @@ namespace {
          * @since 5.0.0 Added the Twenty Nineteen theme.
          * @since 5.3.0 Added the Twenty Twenty theme.
          * @since 5.6.0 Added the Twenty Twenty-One theme.
-         * @var array
+         * @since 5.9.0 Added the Twenty Twenty-Two theme.
+         * @var string[]
          */
         private static $default_themes = array('classic' => 'WordPress Classic', 'default' => 'WordPress Default', 'twentyten' => 'Twenty Ten', 'twentyeleven' => 'Twenty Eleven', 'twentytwelve' => 'Twenty Twelve', 'twentythirteen' => 'Twenty Thirteen', 'twentyfourteen' => 'Twenty Fourteen', 'twentyfifteen' => 'Twenty Fifteen', 'twentysixteen' => 'Twenty Sixteen', 'twentyseventeen' => 'Twenty Seventeen', 'twentynineteen' => 'Twenty Nineteen', 'twentytwenty' => 'Twenty Twenty', 'twentytwentyone' => 'Twenty Twenty-One', 'twentytwentytwo' => 'Twenty Twenty-Two');
         /**
          * Renamed theme tags.
          *
          * @since 3.8.0
-         * @var array
+         * @var string[]
          */
         private static $tag_map = array('fixed-width' => 'fixed-layout', 'flexible-width' => 'fluid-layout');
         /**
@@ -36581,7 +36890,7 @@ namespace {
         {
         }
         /**
-         * Whether the theme exists.
+         * Determines whether the theme exists.
          *
          * A theme with errors exists. A theme with the error of 'theme_not_found',
          * meaning that the theme's directory was not found, does not exist.
@@ -36598,7 +36907,7 @@ namespace {
          *
          * @since 3.4.0
          *
-         * @return WP_Theme|false Parent theme, or false if the current theme is not a child theme.
+         * @return WP_Theme|false Parent theme, or false if the active theme is not a child theme.
          */
         public function parent()
         {
@@ -36639,7 +36948,7 @@ namespace {
         {
         }
         /**
-         * Get a raw, unformatted theme header.
+         * Gets a raw, unformatted theme header.
          *
          * The header is sanitized, but is not translated, and is not marked up for display.
          * To get a theme header for display, use the display() method.
@@ -36672,7 +36981,7 @@ namespace {
         {
         }
         /**
-         * Sanitize a theme header.
+         * Sanitizes a theme header.
          *
          * @since 3.4.0
          * @since 5.4.0 Added support for `Requires at least` and `Requires PHP` headers.
@@ -36686,7 +36995,7 @@ namespace {
         {
         }
         /**
-         * Mark up a theme header.
+         * Marks up a theme header.
          *
          * @since 3.4.0
          *
@@ -36699,7 +37008,7 @@ namespace {
         {
         }
         /**
-         * Translate a theme header.
+         * Translates a theme header.
          *
          * @since 3.4.0
          *
@@ -36711,7 +37020,7 @@ namespace {
         {
         }
         /**
-         * The directory name of the theme's "stylesheet" files, inside the theme root.
+         * Returns the directory name of the theme's "stylesheet" files, inside the theme root.
          *
          * In the case of a child theme, this is directory name of the child theme.
          * Otherwise, get_stylesheet() is the same as get_template().
@@ -36724,7 +37033,7 @@ namespace {
         {
         }
         /**
-         * The directory name of the theme's "template" files, inside the theme root.
+         * Returns the directory name of the theme's "template" files, inside the theme root.
          *
          * In the case of a child theme, this is the directory name of the parent theme.
          * Otherwise, the get_template() is the same as get_stylesheet().
@@ -36789,7 +37098,7 @@ namespace {
         {
         }
         /**
-         * The absolute path to the directory of the theme root.
+         * Returns the absolute path to the directory of the theme root.
          *
          * This is typically the absolute path to wp-content/themes.
          *
@@ -36831,7 +37140,7 @@ namespace {
         {
         }
         /**
-         * Return files in the theme's directory.
+         * Returns files in the theme's directory.
          *
          * @since 3.4.0
          *
@@ -36906,7 +37215,7 @@ namespace {
         {
         }
         /**
-         * Whether the theme is allowed (multisite only).
+         * Determines whether the theme is allowed (multisite only).
          *
          * @since 3.4.0
          *
@@ -37220,7 +37529,7 @@ namespace {
         {
         }
         /**
-         * Prepare the query variables.
+         * Prepares the query variables.
          *
          * @since 3.1.0
          * @since 4.1.0 Added the ability to order by the `include` value.
@@ -37262,7 +37571,7 @@ namespace {
          *                                                See WP_Meta_Query::__construct for accepted values and default value.
          *     @type array           $meta_query          An associative array of WP_Meta_Query arguments.
          *                                                See WP_Meta_Query::__construct for accepted values.
-         *     @type string          $capability          An array or a comma-separated list of capability names that users must match
+         *     @type string|string[] $capability          An array or a comma-separated list of capability names that users must match
          *                                                to be included in results. Note that this is an inclusive list: users
          *                                                must match *each* capability.
          *                                                Does NOT work for capabilities not in the database or filtered via {@see 'map_meta_cap'}.
@@ -37326,6 +37635,11 @@ namespace {
          *                                                - 'user_email'
          *                                                - 'user_url'
          *                                                - 'user_registered'
+         *                                                - 'user_pass'
+         *                                                - 'user_activation_key'
+         *                                                - 'user_status'
+         *                                                - 'spam' (only available on multisite installs)
+         *                                                - 'deleted' (only available on multisite installs)
          *                                                - 'all' for all fields
          *                                                - 'all_with_meta' to include meta fields.
          *                                                Default 'all'.
@@ -37350,7 +37664,7 @@ namespace {
         {
         }
         /**
-         * Execute the query, with the current variables.
+         * Executes the query, with the current variables.
          *
          * @since 3.1.0
          *
@@ -37360,7 +37674,7 @@ namespace {
         {
         }
         /**
-         * Retrieve query variable.
+         * Retrieves query variable.
          *
          * @since 3.5.0
          *
@@ -37371,7 +37685,7 @@ namespace {
         {
         }
         /**
-         * Set query variable.
+         * Sets query variable.
          *
          * @since 3.5.0
          *
@@ -37382,23 +37696,23 @@ namespace {
         {
         }
         /**
-         * Used internally to generate an SQL string for searching across multiple columns
+         * Used internally to generate an SQL string for searching across multiple columns.
          *
          * @since 3.1.0
          *
          * @global wpdb $wpdb WordPress database abstraction object.
          *
-         * @param string $string
-         * @param array  $cols
-         * @param bool   $wild   Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
-         *                       Single site allows leading and trailing wildcards, Network Admin only trailing.
+         * @param string   $search  Search string.
+         * @param string[] $columns Array of columns to search.
+         * @param bool     $wild    Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
+         *                          Single site allows leading and trailing wildcards, Network Admin only trailing.
          * @return string
          */
-        protected function get_search_sql($string, $cols, $wild = \false)
+        protected function get_search_sql($search, $columns, $wild = \false)
         {
         }
         /**
-         * Return the list of users.
+         * Returns the list of users.
          *
          * @since 3.1.0
          *
@@ -37408,7 +37722,7 @@ namespace {
         {
         }
         /**
-         * Return the total number of users for the current query.
+         * Returns the total number of users for the current query.
          *
          * @since 3.1.0
          *
@@ -37418,7 +37732,7 @@ namespace {
         {
         }
         /**
-         * Parse and sanitize 'orderby' keys passed to the user query.
+         * Parses and sanitizes 'orderby' keys passed to the user query.
          *
          * @since 4.2.0
          *
@@ -37431,7 +37745,7 @@ namespace {
         {
         }
         /**
-         * Parse an 'order' query variable and cast it to ASC or DESC as necessary.
+         * Parses an 'order' query variable and casts it to ASC or DESC as necessary.
          *
          * @since 4.2.0
          *
@@ -37442,7 +37756,7 @@ namespace {
         {
         }
         /**
-         * Make private properties readable for backward compatibility.
+         * Makes private properties readable for backward compatibility.
          *
          * @since 4.0.0
          *
@@ -37453,7 +37767,7 @@ namespace {
         {
         }
         /**
-         * Make private properties settable for backward compatibility.
+         * Makes private properties settable for backward compatibility.
          *
          * @since 4.0.0
          *
@@ -37465,7 +37779,7 @@ namespace {
         {
         }
         /**
-         * Make private properties checkable for backward compatibility.
+         * Makes private properties checkable for backward compatibility.
          *
          * @since 4.0.0
          *
@@ -37476,7 +37790,7 @@ namespace {
         {
         }
         /**
-         * Make private properties un-settable for backward compatibility.
+         * Makes private properties un-settable for backward compatibility.
          *
          * @since 4.0.0
          *
@@ -37486,7 +37800,7 @@ namespace {
         {
         }
         /**
-         * Make private/protected methods readable for backward compatibility.
+         * Makes private/protected methods readable for backward compatibility.
          *
          * @since 4.0.0
          *
@@ -37722,7 +38036,7 @@ namespace {
         {
         }
         /**
-         * Return only the main user fields
+         * Returns only the main user fields.
          *
          * @since 3.3.0
          * @since 4.4.0 Added 'ID' as an alias of 'id' for the `$field` parameter.
@@ -37730,8 +38044,8 @@ namespace {
          * @global wpdb $wpdb WordPress database abstraction object.
          *
          * @param string     $field The field to query against: 'id', 'ID', 'slug', 'email' or 'login'.
-         * @param string|int $value The field value
-         * @return object|false Raw user object
+         * @param string|int $value The field value.
+         * @return object|false Raw user object.
          */
         public static function get_data_by($field, $value)
         {
@@ -37783,7 +38097,7 @@ namespace {
         {
         }
         /**
-         * Determine whether the user exists in the database.
+         * Determines whether the user exists in the database.
          *
          * @since 3.4.0
          *
@@ -37793,7 +38107,7 @@ namespace {
         {
         }
         /**
-         * Retrieve the value of a property or meta key.
+         * Retrieves the value of a property or meta key.
          *
          * Retrieves from the users and usermeta table.
          *
@@ -37806,20 +38120,20 @@ namespace {
         {
         }
         /**
-         * Determine whether a property or meta key is set
+         * Determines whether a property or meta key is set.
          *
          * Consults the users and usermeta tables.
          *
          * @since 3.3.0
          *
-         * @param string $key Property
+         * @param string $key Property.
          * @return bool
          */
         public function has_prop($key)
         {
         }
         /**
-         * Return an array representation.
+         * Returns an array representation.
          *
          * @since 3.5.0
          *
@@ -37841,7 +38155,7 @@ namespace {
         {
         }
         /**
-         * Set up capability object properties.
+         * Sets up capability object properties.
          *
          * Will set the value for the 'cap_key' property to current database table
          * prefix, followed by 'capabilities'. Will then check to see if the
@@ -37875,7 +38189,7 @@ namespace {
         {
         }
         /**
-         * Add role to user.
+         * Adds role to user.
          *
          * Updates the user's meta data option with capabilities and roles.
          *
@@ -37887,7 +38201,7 @@ namespace {
         {
         }
         /**
-         * Remove role from user.
+         * Removes role from user.
          *
          * @since 2.0.0
          *
@@ -37897,7 +38211,7 @@ namespace {
         {
         }
         /**
-         * Set the role of the user.
+         * Sets the role of the user.
          *
          * This will remove the previous roles of the user and assign the user the
          * new one. You can set the role to an empty string and it will remove all
@@ -37911,7 +38225,7 @@ namespace {
         {
         }
         /**
-         * Choose the maximum level the user has.
+         * Chooses the maximum level the user has.
          *
          * Will compare the level from the $item parameter against the $max
          * parameter. If the item is incorrect, then just the $max parameter value
@@ -37932,7 +38246,7 @@ namespace {
         {
         }
         /**
-         * Update the maximum user level for the user.
+         * Updates the maximum user level for the user.
          *
          * Updates the 'user_level' user metadata (includes prefix that is the
          * database table prefix) with the maximum user level. Gets the value from
@@ -37946,7 +38260,7 @@ namespace {
         {
         }
         /**
-         * Add capability and grant or deny access to capability.
+         * Adds capability and grant or deny access to capability.
          *
          * @since 2.0.0
          *
@@ -37957,7 +38271,7 @@ namespace {
         {
         }
         /**
-         * Remove capability from user.
+         * Removes capability from user.
          *
          * @since 2.0.0
          *
@@ -37967,7 +38281,7 @@ namespace {
         {
         }
         /**
-         * Remove all of the capabilities of the user.
+         * Removes all of the capabilities of the user.
          *
          * @since 2.1.0
          *
@@ -38007,7 +38321,7 @@ namespace {
         {
         }
         /**
-         * Convert numeric level to level capability name.
+         * Converts numeric level to level capability name.
          *
          * Prepends 'level_' to level number.
          *
@@ -38020,7 +38334,7 @@ namespace {
         {
         }
         /**
-         * Set the site to operate on. Defaults to the current site.
+         * Sets the site to operate on. Defaults to the current site.
          *
          * @since 3.0.0
          * @deprecated 4.9.0 Use WP_User::for_site()
@@ -39180,11 +39494,11 @@ namespace {
          * @param array $args {
          *     Method arguments. Note: arguments must be ordered as documented.
          *
-         *     @type int    $blog_id      Blog ID (unused).
-         *     @type string $username     Username.
-         *     @type string $password     Password.
-         *     @type string $taxnomy_name Taxonomy name.
-         *     @type int    $term_id      Term ID.
+         *     @type int    $blog_id       Blog ID (unused).
+         *     @type string $username      Username.
+         *     @type string $password      Password.
+         *     @type string $taxonomy_name Taxonomy name.
+         *     @type int    $term_id       Term ID.
          * }
          * @return true|IXR_Error True on success, IXR_Error instance on failure.
          */
@@ -39204,7 +39518,7 @@ namespace {
          *     @type int    $blog_id  Blog ID (unused).
          *     @type string $username Username.
          *     @type string $password Password.
-         *     @type string $taxnomy  Taxonomy name.
+         *     @type string $taxonomy Taxonomy name.
          *     @type string $term_id  Term ID.
          * }
          * @return array|IXR_Error IXR_Error on failure, array on success, containing:
@@ -39237,7 +39551,7 @@ namespace {
          *     @type int    $blog_id  Blog ID (unused).
          *     @type string $username Username.
          *     @type string $password Password.
-         *     @type string $taxnomy  Taxonomy name.
+         *     @type string $taxonomy Taxonomy name.
          *     @type array  $filter   Optional. Modifies the query used to retrieve posts. Accepts 'number',
          *                            'offset', 'orderby', 'order', 'hide_empty', and 'search'. Default empty array.
          * }
@@ -39259,7 +39573,7 @@ namespace {
          *     @type int    $blog_id  Blog ID (unused).
          *     @type string $username Username.
          *     @type string $password Password.
-         *     @type string $taxnomy  Taxonomy name.
+         *     @type string $taxonomy Taxonomy name.
          *     @type array  $fields   Optional. Array of taxonomy fields to limit to in the return.
          *                            Accepts 'labels', 'cap', 'menu', and 'object_type'.
          *                            Default empty array.
@@ -40571,35 +40885,35 @@ namespace {
          * @since 2.0.0
          * @var array
          */
-        public $query_vars;
+        public $query_vars = array();
         /**
          * String parsed to set the query variables.
          *
          * @since 2.0.0
          * @var string
          */
-        public $query_string;
+        public $query_string = '';
         /**
          * The request path, e.g. 2015/05/06.
          *
          * @since 2.0.0
          * @var string
          */
-        public $request;
+        public $request = '';
         /**
          * Rewrite rule the request matched.
          *
          * @since 2.0.0
          * @var string
          */
-        public $matched_rule;
+        public $matched_rule = '';
         /**
          * Rewrite query the request matched.
          *
          * @since 2.0.0
          * @var string
          */
-        public $matched_query;
+        public $matched_query = '';
         /**
          * Whether already did the permalink.
          *
@@ -40645,10 +40959,12 @@ namespace {
          * filters and actions that can be used to further manipulate the result.
          *
          * @since 2.0.0
+         * @since 6.0.0 A return value was added.
          *
          * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
          *
          * @param array|string $extra_query_vars Set the extra query variables.
+         * @return bool Whether the request was parsed.
          */
         public function parse_request($extra_query_vars = '')
         {
@@ -41005,16 +41321,16 @@ namespace {
         {
         }
         /**
-         * Query list for an item.
+         * Query the list for an item.
          *
          * @since 2.1.0
          * @since 2.6.0 Moved from `WP_Scripts`.
          *
          * @param string $handle Name of the item. Should be unique.
-         * @param string $list   Optional. Property name of list array. Default 'registered'.
+         * @param string $status Optional. Status of the item to query. Default 'registered'.
          * @return bool|_WP_Dependency Found, or object Item data.
          */
-        public function query($handle, $list = 'registered')
+        public function query($handle, $status = 'registered')
         {
         }
         /**
@@ -41145,7 +41461,7 @@ namespace {
         /**
          * Holds a string which contains the type attribute for script tag.
          *
-         * If the current theme does not declare HTML5 support for 'script',
+         * If the active theme does not declare HTML5 support for 'script',
          * then it initializes as `type='text/javascript'`.
          *
          * @since 5.3.0
@@ -41190,18 +41506,18 @@ namespace {
          * Prints extra scripts of a registered script.
          *
          * @since 2.1.0
-         * @since 2.8.0 Added the `$echo` parameter.
+         * @since 2.8.0 Added the `$display` parameter.
          * @deprecated 3.3.0
          *
          * @see print_extra_script()
          *
-         * @param string $handle The script's registered handle.
-         * @param bool   $echo   Optional. Whether to echo the extra script
-         *                       instead of just returning it. Default true.
-         * @return bool|string|void Void if no data exists, extra scripts if `$echo` is true,
+         * @param string $handle  The script's registered handle.
+         * @param bool   $display Optional. Whether to print the extra script
+         *                        instead of just returning it. Default true.
+         * @return bool|string|void Void if no data exists, extra scripts if `$display` is true,
          *                          true otherwise.
          */
-        public function print_scripts_l10n($handle, $echo = \true)
+        public function print_scripts_l10n($handle, $display = \true)
         {
         }
         /**
@@ -41209,13 +41525,13 @@ namespace {
          *
          * @since 3.3.0
          *
-         * @param string $handle The script's registered handle.
-         * @param bool   $echo   Optional. Whether to echo the extra script
-         *                       instead of just returning it. Default true.
-         * @return bool|string|void Void if no data exists, extra scripts if `$echo` is true,
+         * @param string $handle  The script's registered handle.
+         * @param bool   $display Optional. Whether to print the extra script
+         *                        instead of just returning it. Default true.
+         * @return bool|string|void Void if no data exists, extra scripts if `$display` is true,
          *                          true otherwise.
          */
-        public function print_extra_script($handle, $echo = \true)
+        public function print_extra_script($handle, $display = \true)
         {
         }
         /**
@@ -41258,11 +41574,11 @@ namespace {
          *                         Must be lowercase.
          * @param string $position Optional. Whether to add the inline script
          *                         before the handle or after. Default 'after'.
-         * @param bool   $echo     Optional. Whether to echo the script
+         * @param bool   $display  Optional. Whether to print the script
          *                         instead of just returning it. Default true.
          * @return string|false Script on success, false otherwise.
          */
-        public function print_inline_script($handle, $position = 'after', $echo = \true)
+        public function print_inline_script($handle, $position = 'after', $display = \true)
         {
         }
         /**
@@ -41313,13 +41629,13 @@ namespace {
          *
          * @since 5.0.0
          *
-         * @param string $handle Name of the script to add the inline script to.
-         *                       Must be lowercase.
-         * @param bool   $echo   Optional. Whether to echo the script
-         *                       instead of just returning it. Default true.
+         * @param string $handle  Name of the script to add the inline script to.
+         *                        Must be lowercase.
+         * @param bool   $display Optional. Whether to print the script
+         *                        instead of just returning it. Default true.
          * @return string|false Script on success, false otherwise.
          */
-        public function print_translations($handle, $echo = \true)
+        public function print_translations($handle, $display = \true)
         {
         }
         /**
@@ -41477,7 +41793,7 @@ namespace {
         /**
          * Holds a string which contains the type attribute for style tag.
          *
-         * If the current theme does not declare HTML5 support for 'style',
+         * If the active theme does not declare HTML5 support for 'style',
          * then it initializes as `type='text/css'`.
          *
          * @since 5.3.0
@@ -41525,13 +41841,13 @@ namespace {
          *
          * @since 3.3.0
          *
-         * @param string $handle The style's registered handle.
-         * @param bool   $echo   Optional. Whether to echo the inline style
-         *                       instead of just returning it. Default true.
-         * @return string|bool False if no data exists, inline styles if `$echo` is true,
+         * @param string $handle  The style's registered handle.
+         * @param bool   $display Optional. Whether to print the inline style
+         *                        instead of just returning it. Default true.
+         * @return string|bool False if no data exists, inline styles if `$display` is true,
          *                     true otherwise.
          */
-        public function print_inline_style($handle, $echo = \true)
+        public function print_inline_style($handle, $display = \true)
         {
         }
         /**
@@ -43475,7 +43791,7 @@ namespace {
          * @param array $nav_menu_options Array as returned by get_option( 'nav_menu_options' ).
          * @param int   $menu_id          The term ID for the given menu.
          * @param bool  $auto_add         Whether to auto-add or not.
-         * @return array (Maybe) modified nav_menu_otions array.
+         * @return array (Maybe) modified nav_menu_options array.
          */
         protected function filter_nav_menu_options_value($nav_menu_options, $menu_id, $auto_add)
         {
@@ -44037,7 +44353,7 @@ namespace {
          * @param int    $errno   Error number.
          * @param string $errstr  Error string.
          * @param string $errfile Error file.
-         * @param string $errline Error line.
+         * @param int    $errline Error line.
          * @return true Always true.
          */
         public function handle_error($errno, $errstr, $errfile = \null, $errline = \null)
@@ -44236,7 +44552,7 @@ namespace {
         /**
          * An Underscore (JS) template for rendering this panel's container.
          *
-         * The themes panel renders a custom panel heading with the current theme and a switch themes button.
+         * The themes panel renders a custom panel heading with the active theme and a switch themes button.
          *
          * @see WP_Customize_Panel::print_template()
          *
@@ -48352,9 +48668,9 @@ namespace PHPMailer\PHPMailer {
          */
         public $AuthType = '';
         /**
-         * An instance of the PHPMailer OAuth class.
+         * An implementation of the PHPMailer OAuthTokenProvider interface.
          *
-         * @var OAuth
+         * @var OAuthTokenProvider
          */
         protected $oauth;
         /**
@@ -48702,7 +49018,7 @@ namespace PHPMailer\PHPMailer {
          *
          * @var string
          */
-        const VERSION = '6.5.3';
+        const VERSION = '6.6.0';
         /**
          * Error severity: message only, continue processing.
          *
@@ -48929,6 +49245,7 @@ namespace PHPMailer\PHPMailer {
          *
          * @param string $addrstr The address list string
          * @param bool   $useimap Whether to use the IMAP extension to parse the list
+         * @param string $charset The charset to use when decoding the address list string.
          *
          * @return array
          */
@@ -49694,6 +50011,15 @@ namespace PHPMailer\PHPMailer {
         {
         }
         /**
+         * Build an error message starting with a generic one and adding details if possible.
+         *
+         * @param string $base_key
+         * @return string
+         */
+        private function getSmtpErrorMessage($base_key)
+        {
+        }
+        /**
          * Check if an error occurred.
          *
          * @return bool True if an error did occur
@@ -50035,17 +50361,17 @@ namespace PHPMailer\PHPMailer {
         {
         }
         /**
-         * Get the OAuth instance.
+         * Get the OAuthTokenProvider instance.
          *
-         * @return OAuth
+         * @return OAuthTokenProvider
          */
         public function getOAuth()
         {
         }
         /**
-         * Set an OAuth instance.
+         * Set an OAuthTokenProvider instance.
          */
-        public function setOAuth(\PHPMailer\PHPMailer\OAuth $oauth)
+        public function setOAuth(\PHPMailer\PHPMailer\OAuthTokenProvider $oauth)
         {
         }
     }
@@ -50063,7 +50389,7 @@ namespace PHPMailer\PHPMailer {
          *
          * @var string
          */
-        const VERSION = '6.5.3';
+        const VERSION = '6.6.0';
         /**
          * SMTP line break constant.
          *
@@ -50191,7 +50517,7 @@ namespace PHPMailer\PHPMailer {
          *
          * @var string[]
          */
-        protected $smtp_transaction_id_patterns = ['exim' => '/[\\d]{3} OK id=(.*)/', 'sendmail' => '/[\\d]{3} 2.0.0 (.*) Message/', 'postfix' => '/[\\d]{3} 2.0.0 Ok: queued as (.*)/', 'Microsoft_ESMTP' => '/[0-9]{3} 2.[\\d].0 (.*)@(?:.*) Queued mail for delivery/', 'Amazon_SES' => '/[\\d]{3} Ok (.*)/', 'SendGrid' => '/[\\d]{3} Ok: queued as (.*)/', 'CampaignMonitor' => '/[\\d]{3} 2.0.0 OK:([a-zA-Z\\d]{48})/', 'Haraka' => '/[\\d]{3} Message Queued \\((.*)\\)/'];
+        protected $smtp_transaction_id_patterns = ['exim' => '/[\\d]{3} OK id=(.*)/', 'sendmail' => '/[\\d]{3} 2.0.0 (.*) Message/', 'postfix' => '/[\\d]{3} 2.0.0 Ok: queued as (.*)/', 'Microsoft_ESMTP' => '/[0-9]{3} 2.[\\d].0 (.*)@(?:.*) Queued mail for delivery/', 'Amazon_SES' => '/[\\d]{3} Ok (.*)/', 'SendGrid' => '/[\\d]{3} Ok: queued as (.*)/', 'CampaignMonitor' => '/[\\d]{3} 2.0.0 OK:([a-zA-Z\\d]{48})/', 'Haraka' => '/[\\d]{3} Message Queued \\((.*)\\)/', 'Mailjet' => '/[\\d]{3} OK queued as (.*)/'];
         /**
          * The last transaction ID issued in response to a DATA command,
          * if one was detected.
@@ -50290,7 +50616,7 @@ namespace PHPMailer\PHPMailer {
          * @param string $username The user name
          * @param string $password The password
          * @param string $authtype The auth type (CRAM-MD5, PLAIN, LOGIN, XOAUTH2)
-         * @param OAuth  $OAuth    An optional OAuth instance for XOAUTH2 authentication
+         * @param OAuthTokenProvider $OAuth An optional OAuthTokenProvider instance for XOAUTH2 authentication
          *
          * @return bool True if successfully authenticated
          */
@@ -50682,12 +51008,12 @@ namespace {
         }
     }
     /**
-     * Translation_Entry class encapsulates a translatable string
+     * Translation_Entry class encapsulates a translatable string.
      */
     class Translation_Entry
     {
         /**
-         * Whether the entry contains a string and its plural form, default is false
+         * Whether the entry contains a string and its plural form, default is false.
          *
          * @var bool
          */
@@ -50707,7 +51033,7 @@ namespace {
          *     @type string $singular            The string to translate, if omitted an
          *                                       empty entry will be created.
          *     @type string $plural              The plural form of the string, setting
-         *                                       this will set {@link $is_plural} to true.
+         *                                       this will set `$is_plural` to true.
          *     @type array  $translations        Translations of the string and possibly
          *                                       its plural forms.
          *     @type string $context             A string differentiating two equal strings
@@ -50733,9 +51059,9 @@ namespace {
         {
         }
         /**
-         * Generates a unique key for this entry
+         * Generates a unique key for this entry.
          *
-         * @return string|bool the key or false if the entry is empty
+         * @return string|false The key or false if the entry is empty.
          */
         public function key()
         {
@@ -50839,7 +51165,6 @@ namespace {
          * Merge $other in the current object.
          *
          * @param Object $other Another Translation object, whose translations will be merged in this one (passed by reference).
-         * @return void
          */
         public function merge_with(&$other)
         {
@@ -55356,7 +55681,7 @@ namespace {
          *
          * @param string $rel   Link relation. Either an IANA registered type, or an absolute URL.
          * @param string $link  Target IRI for the link.
-         * @param array  $other Optional. Other parameters to send, as an assocative array.
+         * @param array  $other Optional. Other parameters to send, as an associative array.
          *                      Default empty array.
          */
         public function link_header($rel, $link, $other = array())
@@ -55654,9 +55979,10 @@ namespace {
          * data instead.
          *
          * @since 4.4.0
+         * @since 6.0.0 The $embed parameter can now contain a list of link relations to include
          *
          * @param WP_REST_Response $response Response object.
-         * @param bool             $embed    Whether links should be embedded.
+         * @param bool|string[]    $embed    Whether to embed all links, a filtered list of link relations, or no links.
          * @return WP_REST_Response New response with wrapped data
          */
         public function envelope_response($response, $embed)
@@ -57828,7 +58154,7 @@ namespace {
         {
         }
         /**
-         * Parse block metadata for a block, and prepare it for an API repsonse.
+         * Parse block metadata for a block, and prepare it for an API response.
          *
          * @since 5.5.0
          * @since 5.9.0 Renamed `$plugin` to `$item` to match parent class for PHP 8 named parameter support.
@@ -57880,6 +58206,167 @@ namespace {
          * @return array Collection parameters.
          */
         public function get_collection_params()
+        {
+        }
+    }
+    /**
+     * REST API: WP_REST_Block_Pattern_Catergories_Controller class
+     *
+     * @package    WordPress
+     * @subpackage REST_API
+     * @since      6.0.0
+     */
+    /**
+     * Core class used to access block pattern categories via the REST API.
+     *
+     * @since 6.0.0
+     *
+     * @see WP_REST_Controller
+     */
+    class WP_REST_Block_Pattern_Categories_Controller extends \WP_REST_Controller
+    {
+        /**
+         * Constructs the controller.
+         *
+         * @since 6.0.0
+         */
+        public function __construct()
+        {
+        }
+        /**
+         * Registers the routes for the objects of the controller.
+         *
+         * @since 6.0.0
+         */
+        public function register_routes()
+        {
+        }
+        /**
+         * Checks whether a given request has permission to read block patterns.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request Full details about the request.
+         * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+         */
+        public function get_items_permissions_check($request)
+        {
+        }
+        /**
+         * Retrieves all block pattern categories.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request Full details about the request.
+         * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
+         */
+        public function get_items($request)
+        {
+        }
+        /**
+         * Prepare a raw block pattern category before it gets output in a REST API response.
+         *
+         * @since 6.0.0
+         *
+         * @param array           $item    Raw category as registered, before any changes.
+         * @param WP_REST_Request $request Request object.
+         * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+         */
+        public function prepare_item_for_response($item, $request)
+        {
+        }
+        /**
+         * Retrieves the block pattern category schema, conforming to JSON Schema.
+         *
+         * @since 6.0.0
+         *
+         * @return array Item schema data.
+         */
+        public function get_item_schema()
+        {
+        }
+    }
+    /**
+     * REST API: WP_REST_Block_Patterns_Controller class
+     *
+     * @package    WordPress
+     * @subpackage REST_API
+     * @since      6.0.0
+     */
+    /**
+     * Core class used to access block patterns via the REST API.
+     *
+     * @since 6.0.0
+     *
+     * @see WP_REST_Controller
+     */
+    class WP_REST_Block_Patterns_Controller extends \WP_REST_Controller
+    {
+        /**
+         * Defines whether remote patterns should be loaded.
+         *
+         * @since 6.0.0
+         * @var bool
+         */
+        private $remote_patterns_loaded;
+        /**
+         * Constructs the controller.
+         *
+         * @since 6.0.0
+         */
+        public function __construct()
+        {
+        }
+        /**
+         * Registers the routes for the objects of the controller.
+         *
+         * @since 6.0.0
+         */
+        public function register_routes()
+        {
+        }
+        /**
+         * Checks whether a given request has permission to read block patterns.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request Full details about the request.
+         * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+         */
+        public function get_items_permissions_check($request)
+        {
+        }
+        /**
+         * Retrieves all block patterns.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request Full details about the request.
+         * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+         */
+        public function get_items($request)
+        {
+        }
+        /**
+         * Prepare a raw block pattern before it gets output in a REST API response.
+         *
+         * @since 6.0.0
+         *
+         * @param array           $item    Raw pattern as registered, before any changes.
+         * @param WP_REST_Request $request Request object.
+         * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+         */
+        public function prepare_item_for_response($item, $request)
+        {
+        }
+        /**
+         * Retrieves the block pattern schema, conforming to JSON Schema.
+         *
+         * @since 6.0.0
+         *
+         * @return array Item schema data.
+         */
+        public function get_item_schema()
         {
         }
     }
@@ -58147,7 +58634,7 @@ namespace {
          *
          * @since 5.0.0
          *
-         * @param array  $data    Response data to fiter.
+         * @param array  $data    Response data to filter.
          * @param string $context Context defined in the schema.
          * @return array Filtered response.
          */
@@ -58762,6 +59249,29 @@ namespace {
          * @return WP_REST_Response|WP_Error
          */
         public function get_theme_item($request)
+        {
+        }
+        /**
+         * Checks if a given request has access to read a single theme global styles config.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request Full details about the request.
+         * @return true|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+         */
+        public function get_theme_items_permissions_check($request)
+        {
+        }
+        /**
+         * Returns the given theme global styles variations.
+         *
+         * @since 6.0.0
+         *
+         * @param WP_REST_Request $request The request instance.
+         *
+         * @return WP_REST_Response|WP_Error
+         */
+        public function get_theme_items($request)
         {
         }
     }
@@ -59568,6 +60078,7 @@ namespace {
          * Search and retrieve block patterns metadata
          *
          * @since 5.8.0
+         * @since 6.0.0 Added 'slug' to request.
          *
          * @param WP_REST_Request $request Full details about the request.
          * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
@@ -59606,6 +60117,23 @@ namespace {
          * @return array Collection parameters.
          */
         public function get_collection_params()
+        {
+        }
+        /*
+         * Include a hash of the query args, so that different requests are stored in
+         * separate caches.
+         *
+         * MD5 is chosen for its speed, low-collision rate, universal availability, and to stay
+         * under the character limit for `_site_transient_timeout_{...}` keys.
+         *
+         * @link https://stackoverflow.com/questions/3665247/fastest-hash-for-non-cryptographic-uses
+         *
+         * @since 6.0.0
+         *
+         * @param array $query_args Query arguments to generate a transient key from.
+         * @return string Transient key.
+         */
+        protected function get_transient_key($query_args)
         {
         }
     }
@@ -61344,7 +61872,7 @@ namespace {
         {
         }
         /**
-         * Retrieves the contents of the `<title>` tag from the HTML response.
+         * Retrieves the contents of the title tag from the HTML response.
          *
          * @since 5.9.0
          *
@@ -61355,7 +61883,7 @@ namespace {
         {
         }
         /**
-         * Checks whether a given request has permission to read remote urls.
+         * Checks whether a given request has permission to read remote URLs.
          *
          * @since 5.9.0
          *
@@ -61377,7 +61905,7 @@ namespace {
         {
         }
         /**
-         * Parses the `<title>` contents from the provided HTML.
+         * Parses the title tag contents from the provided HTML.
          *
          * @since 5.9.0
          *
@@ -61407,9 +61935,9 @@ namespace {
          * @param array $meta_elements {
          *     A multi-dimensional indexed array on success, else empty array.
          *
-         *     @type string[] 0 Meta elements with a content attribute.
-         *     @type string[] 1 Content attribute's opening quotation mark.
-         *     @type string[] 2 Content attribute's value for each meta element.
+         *     @type string[] $0 Meta elements with a content attribute.
+         *     @type string[] $1 Content attribute's opening quotation mark.
+         *     @type string[] $2 Content attribute's value for each meta element.
          * }
          * @return string The meta description contents on success. Empty string if not found.
          */
@@ -61426,9 +61954,9 @@ namespace {
          * @param array  $meta_elements {
          *     A multi-dimensional indexed array on success, else empty array.
          *
-         *     @type string[] 0 Meta elements with a content attribute.
-         *     @type string[] 1 Content attribute's opening quotation mark.
-         *     @type string[] 2 Content attribute's value for each meta element.
+         *     @type string[] $0 Meta elements with a content attribute.
+         *     @type string[] $1 Content attribute's opening quotation mark.
+         *     @type string[] $2 Content attribute's value for each meta element.
          * }
          * @param string $url The target website URL.
          * @return string The OG image on success. Empty string if not found.
@@ -61484,7 +62012,7 @@ namespace {
         {
         }
         /**
-         * Retrieves the `<head>` section.
+         * Retrieves the head element section.
          *
          * @since 5.9.0
          *
@@ -61495,7 +62023,7 @@ namespace {
         {
         }
         /**
-         * Gets all the `<meta>` elements that have a `content` attribute.
+         * Gets all the meta tag elements that have a 'content' attribute.
          *
          * @since 5.9.0
          *
@@ -61503,9 +62031,9 @@ namespace {
          * @return array {
          *     A multi-dimensional indexed array on success, else empty array.
          *
-         *     @type string[] 0 Meta elements with a content attribute.
-         *     @type string[] 1 Content attribute's opening quotation mark.
-         *     @type string[] 2 Content attribute's value for each meta element.
+         *     @type string[] $0 Meta elements with a content attribute.
+         *     @type string[] $1 Content attribute's opening quotation mark.
+         *     @type string[] $2 Content attribute's value for each meta element.
          * }
          */
         private function get_meta_with_content_elements($html)
@@ -61519,9 +62047,9 @@ namespace {
          * @param array  $meta_elements {
          *     A multi-dimensional indexed array on success, else empty array.
          *
-         *     @type string[] 0 Meta elements with a content attribute.
-         *     @type string[] 1 Content attribute's opening quotation mark.
-         *     @type string[] 2 Content attribute's value for each meta element.
+         *     @type string[] $0 Meta elements with a content attribute.
+         *     @type string[] $1 Content attribute's opening quotation mark.
+         *     @type string[] $2 Content attribute's value for each meta element.
          * }
          * @param string $attr       Attribute that identifies the element with the target metadata.
          * @param string $attr_value The attribute's value that identifies the element with the target metadata.
@@ -68568,7 +69096,7 @@ namespace {
         /**
          * Maximum number of sitemaps to include in an index.
          *
-         * @sincee 5.5.0
+         * @since 5.5.0
          *
          * @var int Maximum number of sitemaps.
          */
@@ -70348,6 +70876,20 @@ namespace {
          */
         protected $registered = \false;
         /**
+         * The default widget description.
+         *
+         * @since 6.0.0
+         * @var string
+         */
+        protected static $default_description = '';
+        /**
+         * The default localized strings used by the widget.
+         *
+         * @since 6.0.0
+         * @var string[]
+         */
+        protected static $l10n_defaults = array();
+        /**
          * Constructor.
          *
          * @since 4.8.0
@@ -70507,6 +71049,14 @@ namespace {
         {
         }
         /**
+         * Resets the cache for the default labels.
+         *
+         * @since 6.0.0
+         */
+        public static function reset_default_labels()
+        {
+        }
+        /**
          * Whether the widget has content to show.
          *
          * @since 4.8.0
@@ -70515,6 +71065,26 @@ namespace {
          * @return bool Whether widget has content.
          */
         protected function has_content($instance)
+        {
+        }
+        /**
+         * Returns the default description of the widget.
+         *
+         * @since 6.0.0
+         *
+         * @return string
+         */
+        protected static function get_default_description()
+        {
+        }
+        /**
+         * Returns the default localized strings used by the widget.
+         *
+         * @since 6.0.0
+         *
+         * @return (string|array)[]
+         */
+        protected static function get_l10n_defaults()
         {
         }
     }
@@ -72428,9 +72998,16 @@ namespace {
          * @since 4.9.0
          *
          * @param string $host The DB_HOST setting to parse.
-         * @return array|false Array containing the host, the port, the socket and
-         *                     whether it is an IPv6 address, in that order.
-         *                     False if $host couldn't be parsed.
+         * @return array|false {
+         *     Array containing the host, the port, the socket and
+         *     whether it is an IPv6 address, in that order.
+         *     False if the host couldn't be parsed.
+         *
+         *     @type string      $0 Host name.
+         *     @type string|null $1 Port.
+         *     @type string|null $2 Socket.
+         *     @type bool        $3 Whether it is an IPv6 address.
+         * }
          */
         public function parse_db_host($host)
         {
@@ -72842,9 +73419,12 @@ namespace {
          *
          * @param string $table  Table name.
          * @param string $column Column name.
-         * @return array|false|WP_Error array( 'length' => (int), 'type' => 'byte' | 'char' ).
-         *                              False if the column has no length (for example, numeric column).
-         *                              WP_Error object if there was an error.
+         * @return array|false|WP_Error {
+         *     Array of column length information, false if the column has no length (for
+         *     example, numeric column), WP_Error object if there was an error.
+         *
+         *     @type int    $length The column length.
+         *     @type string $type   One of 'byte' or 'char'.
          */
         public function get_col_length($table, $column)
         {
