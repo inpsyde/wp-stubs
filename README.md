@@ -51,5 +51,5 @@ installed.
 
 Copyright (c) 2022, Inpsyde GmbH
 
-This software is released under the ["GNU General Public License v2.0 or later"](LICENSE) license.
+This software is released under the ["MIT"](LICENSE) license.
   
