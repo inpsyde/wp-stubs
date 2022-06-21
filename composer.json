@@ -1,11 +1,9 @@
 {
     "name": "inpsyde/wp-stubs",
-    "description": "WordPress stubs",
+    "description": "WordPress Stubs",
     "type": "project",
-    "require": {
-        "php": "^7.4 || ^8"
-    },
     "require-dev": {
+        "php": "^7.4 || ^8",
         "php-stubs/generator": "^v0.8.1",
         "symfony/process": "^5"
     },
