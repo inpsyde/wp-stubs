@@ -47,9 +47,14 @@ and have a requirement like `5.9.*`, using the `stubs/5.9.php` stubs file, that 
 installed.
 
 
+## Minimum requirements
+
+The code that generates the stubs requires PHP 7.4+, however when consuming the package there are no
+minimum requirements, besides [being able to run WordPress](https://wordpress.org/about/requirements/).
+
+
 ## License
 
 Copyright (c) 2022, Inpsyde GmbH
 
 This software is released under the ["MIT"](LICENSE) license.
-  
