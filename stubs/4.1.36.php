@@ -76232,17 +76232,42 @@ namespace {
 }
 namespace {
     /**
-     * Replaces the height and width attributes with values for full size.
+     * Press It form handler.
      *
-     * wp_video_shortcode() limits the width to 640px.
+     * @since 2.6.0
      *
-     * @since 4.6.0
-     * @ignore
-     *
-     * @param $output Video shortcode HTML output.
-     * @return string Filtered HTML content to display video.
+     * @return int Post ID
      */
-    function _wp_override_admin_video_width_limit($output)
+    function press_it()
+    {
+    }
+    function press_this_media_buttons()
+    {
+    }
+    /**
+     * Execute changes made in WordPress 4.1.4.
+     *
+     * @since 4.1.4
+     */
+    function upgrade_414()
+    {
+    }
+    /**
+     * Execute changes made in WordPress 4.1.5.
+     *
+     * @since 4.1.5
+     */
+    function upgrade_415()
+    {
+    }
+    /**
+     * Temporary function to add a missing style rule to the themes page.
+     * This avoids the need to ship an entirely rebuilt wp-admin.css in partial builds.
+     *
+     * @since 4.1.1
+     * @ignore
+     */
+    function _wp_add_themesphp_notice_styling()
     {
     }
 }
