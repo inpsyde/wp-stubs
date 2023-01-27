@@ -20,6 +20,7 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: 8.0
+                    coverage: none
 
             -   name: Install dependencies
                 uses: ramsey/composer-install@v2
@@ -33,5 +34,6 @@ jobs:
                     git config user.name ${{ secrets.INPSYDE_BOT_USER }}
                     git config --add safe.directory "${GITHUB_WORKSPACE}"
                     git add ./stubs/*
+                    git add ./packages.json
                     git commit -m "Update WP stubs" || echo 'Nothing to commit'
                     git push

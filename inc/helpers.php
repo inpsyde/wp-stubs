@@ -201,9 +201,10 @@ function delete(string $path): bool
 /**
  * @param int $all
  * @param int $success
+ * @param bool|null $repoBuilt
  * @return int
  */
-function finalMessage(int $all, int $success): int
+function finalMessage(int $all, int $success, ?bool $repoBuilt): int
 {
     if ($all === 0) {
         fwrite(STDOUT, "\nNothing to process.\n");
@@ -215,17 +216,42 @@ function finalMessage(int $all, int $success): int
 
     if ($success === $all) {
         $message = sprintf("Done creating stubs for %s.", $versionStr);
-        fwrite(STDOUT, "\n{$message}\n");
+        fwrite(STDOUT, "\n{$message}");
+        composerRepoFinalMessage($repoBuilt, true);
 
-        return 0;
+        return $repoBuilt !== false ? 0 : 1;
     }
 
     $error = (($success === 0) || ($all === 1))
         ? sprintf("Failed creating stubs for %s.", $versionStr)
         : sprintf("Failed creating stubs for %d out of %s.", $all - $success, $versionStr);
-    fwrite(STDERR, "\n{$error}\n");
+    fwrite(STDERR, "\n{$error}");
+    composerRepoFinalMessage($repoBuilt, false);
 
     return 1;
+}
+
+/**
+ * @param bool|null $result
+ * @param bool $otherResult
+ * @return void
+ */
+function composerRepoFinalMessage(?bool $result, bool $otherResult): void
+{
+    if ($result) {
+        return;
+    }
+
+    [$message, $stream] = match($result) {
+        false => ['Composer repository update failed', STDERR],
+        null => ['Composer repository unchanged.', STDOUT],
+    };
+
+    if ($result === false) {
+        $message = ($otherResult === true) ? "However, {$message}!" : "{$message} as well!";
+    }
+
+    fwrite($stream, "\n" . $message);
 }
 
 /**

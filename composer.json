@@ -10,7 +10,7 @@
         }
     ],
     "require-dev": {
-        "php": "^7.4 || ^8",
+        "php": "^8",
         "php-stubs/generator": "^v0.8.1",
         "symfony/process": "^5"
     },

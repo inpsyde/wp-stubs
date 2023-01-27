@@ -18,6 +18,8 @@ const EXCLUDED_WP_FILES = [
     'wp-includes/compat.php',
 ];
 
+const VERSIONED_PACKAGE_NAME = 'inpsyde/wp-stubs-versions';
+
 /**
  * @param string $wpPath
  * @return Finder
@@ -98,6 +100,82 @@ function writeOutput(string $output, string $targetPath, string $version): bool
     }
 
     fwrite(STDOUT, "\nStubs for WordPress {$version} written to {$targetPath}.");
+
+    return true;
+}
+
+/**
+ * @param string $targetDir
+ * @return bool
+ */
+function buildComposerRepo(string $targetDir): bool
+{
+    $data = ['packages' => [VERSIONED_PACKAGE_NAME => []]];
+    $finder = Finder::create()->in("{$targetDir}/stubs")
+        ->files()
+        ->name('*.php')
+        ->sortByModifiedTime()
+        ->reverseSorting();
+    $basePackage = [
+        'name' => VERSIONED_PACKAGE_NAME,
+        'version' => '',
+        'dist' => [
+            'url' => 'https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/%s.php',
+            'type' => 'file',
+        ],
+    ];
+    foreach ($finder as $file) {
+        $basename = $file->getBasename('.php');
+        $package = $basePackage;
+        $package['version'] = ($basename === 'latest') ? 'dev-latest' : $basename;
+        $package['dist']['url'] = sprintf($package['dist']['url'], $basename);
+        $data['packages'][VERSIONED_PACKAGE_NAME][] = $package;
+    }
+
+    return writeComposerRepo($data, "{$targetDir}/packages.json");
+}
+
+/**
+ * @param array $data
+ * @param string $targetPath
+ * @return bool
+ */
+function writeComposerRepo(array $data, string $targetPath): bool
+{
+    fwrite(STDOUT, "\nWriting Composer repository to {$targetPath}...");
+
+    if (file_exists($targetPath) && !delete($targetPath)) {
+        fwrite(
+            STDERR,
+            "\nFailed writing Composer repository to '{$targetPath}'. "
+            . "File exists already and could not be deleted."
+        );
+
+        return false;
+    }
+
+    if (empty($data['packages'][VERSIONED_PACKAGE_NAME])) {
+        fwrite(STDERR, "\nFailed generating Composer repository: no package data.");
+
+        return false;
+    }
+
+    try {
+        $output = json_encode($data, JSON_PRETTY_PRINT|JSON_THROW_ON_ERROR|JSON_UNESCAPED_SLASHES);
+    } catch (\Throwable $throwable) {
+        fwrite(STDERR, "\nFailed encoding Composer repository JSON.");
+        fwrite(STDERR, "\n" . $throwable->getMessage());
+
+        return false;
+    }
+
+    if (!file_put_contents($targetPath, $output)) {
+        fwrite(STDERR, "\nFailed writing Composer repository to {$targetPath}.");
+
+        return false;
+    }
+
+    fwrite(STDOUT, "\nComposer repository written to {$targetPath}.");
 
     return true;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inpsyde\WpStubs;
 
 use StubsGenerator\StubsGenerator;
+use Symfony\Component\Finder\Finder;
 
 const WP_STUBS_DIR = __DIR__;
 
@@ -22,7 +23,12 @@ try {
     $toDownload = retrieveDownloadUrls(20);
     $all = count($toDownload);
     if ($all === 0) {
-        exit(finalMessage(0, 0));
+        $repoBuilt = null;
+        if (!file_exists(__DIR__ . '/packages.json')) {
+            fwrite(STDOUT, "\nStubs generation completed. Updating now Composer repo");
+            $repoBuilt = buildComposerRepo(__DIR__);
+        }
+        exit(finalMessage(0, 0, $repoBuilt));
     }
 
     $success = 0;
@@ -87,7 +93,14 @@ try {
     }
 
     fwrite(STDOUT, "\n");
-    exit(finalMessage($all, $success));
+
+    $repoBuilt = null;
+    if (($all > 0) || !file_exists(__DIR__ . '/packages.json')) {
+        fwrite(STDOUT, "\nStubs generation completed. Updating now Composer repo");
+        $repoBuilt = buildComposerRepo(__DIR__);
+    }
+
+    exit(finalMessage($all, $success, $repoBuilt));
 } catch (\Throwable $throwable) {
     function_exists(__NAMESPACE__ . '\\describeFailure')
         ? describeFailure($throwable)
