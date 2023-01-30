@@ -30,8 +30,8 @@ jobs:
 
             -   name: Add, commit, and push
                 run: |
-                    git config user.email ${{ secrets.INPSYDE_BOT_EMAIL }}
-                    git config user.name ${{ secrets.INPSYDE_BOT_USER }}
+                    git config user.email ${{ secrets.DEPLOYBOT_EMAIL }}
+                    git config user.name ${{ secrets.DEPLOYBOT_USER }}
                     git config --add safe.directory "${GITHUB_WORKSPACE}"
                     git add ./stubs/*
                     git add ./packages.json
