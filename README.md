@@ -91,7 +91,7 @@ a [repository](https://getcomposer.org/doc/05-repositories.md#repository) like t
 3. In the Psalm configuration, add these lines:
     ```xml
     <stubs>
-        <file name="vendor/inpsyde/wp-stubs-versions/stubs/latest.php"/>
+        <file name="vendor/inpsyde/wp-stubs-versions/latest.php"/>
     </stubs>
     ```
 
