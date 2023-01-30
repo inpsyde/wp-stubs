@@ -1,4 +1,4 @@
-name: Build WordPress Stubs
+name: Build WordPress stubs
 
 on:
     schedule:
@@ -16,7 +16,7 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v3
 
-            -   name: Setup PHP
+            -   name: Set up PHP
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: 8.0
@@ -25,15 +25,15 @@ jobs:
             -   name: Install dependencies
                 uses: ramsey/composer-install@v2
 
-            -   name: Generate Stubs
+            -   name: Generate stubs
                 run: php generate.php
 
-            -   name: Add, Commit, and Push
+            -   name: Add, commit, and push
                 run: |
-                    git config user.email ${{ secrets.INPSYDE_BOT_EMAIL }}
-                    git config user.name ${{ secrets.INPSYDE_BOT_USER }}
+                    git config user.email ${{ secrets.DEPLOYBOT_EMAIL }}
+                    git config user.name ${{ secrets.DEPLOYBOT_USER }}
                     git config --add safe.directory "${GITHUB_WORKSPACE}"
                     git add ./stubs/*
                     git add ./packages.json
-                    git commit -m "Update WP stubs" || echo 'Nothing to commit'
+                    git commit -m "Update WordPress stubs" || echo 'Nothing to commit'
                     git push
