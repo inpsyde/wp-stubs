@@ -100,8 +100,7 @@ Using this approach, the latest version will be the *only* version Composer down
 ## Minimum requirements
 
 The code that generates the stubs requires PHP 8.0+. However, when consuming the package, there are
-no minimum requirements besides [being able to run
-WordPress (https://wordpress.org/about/requirements/).
+no minimum requirements besides [being able to run WordPress](https://wordpress.org/about/requirements/).
 
 ## License
 
