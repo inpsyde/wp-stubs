@@ -3,265 +3,9 @@
         "inpsyde/wp-stubs-versions": [
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "4.3",
+                "version": "5.9.7",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.3.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.3.31",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.3.31.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.4.30",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.4.30.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.4",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.4.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.5",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.5.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.5.29",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.5.29.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.6.26",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.6.26.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.6",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.6.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.7.26",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.7.26.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.7",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.7.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.8",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.8.22",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.22.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.9",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.9.23",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.23.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.0",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.0.19",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.19.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.1.16",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.16.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.1",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.2.18",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.18.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.2",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.3",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.3.15",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.15.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.4.13",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.13.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.4",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.5",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.5.12",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.12.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.6.11",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.11.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.6",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.7.9",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.9.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.7",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.8",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.8.7",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.7.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.9.6",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.6.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.7.php",
                     "type": "file"
                 }
             },
@@ -275,9 +19,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "6.0.4",
+                "version": "6.0.5",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.4.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.5.php",
                     "type": "file"
                 }
             },
@@ -291,9 +35,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "6.1.2",
+                "version": "6.1.3",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.2.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.3.php",
                     "type": "file"
                 }
             },
@@ -302,6 +46,14 @@
                 "version": "6.1",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.2.2",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.2.2.php",
                     "type": "file"
                 }
             },
@@ -323,9 +75,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "6.2.1",
+                "version": "5.0.16",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.2.1.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.16.php",
                     "type": "file"
                 }
             },
@@ -334,70 +86,6 @@
                 "version": "6.0.2",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.2.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.9.5",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.5.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "6.1.1",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.1.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.9.3",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.3.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.9.4",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.4.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "6.0.1",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.1.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.9.2",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.2.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "6.0.3",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.3.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.0.16",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.16.php",
                     "type": "file"
                 }
             },
@@ -419,6 +107,14 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
+                "version": "4.9",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
                 "version": "5.4.12",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.12.php",
@@ -427,9 +123,17 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "4.8.19",
+                "version": "5.6.11",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.19.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.11.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.2.18",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.18.php",
                     "type": "file"
                 }
             },
@@ -443,9 +147,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "4.1",
+                "version": "5.4.13",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.1.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.13.php",
                     "type": "file"
                 }
             },
@@ -462,6 +166,446 @@
                 "version": "5.3.14",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.14.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.9.6",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.6.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.1.16",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.16.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.7.7",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.7.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.1.14",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.14.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.3.15",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.15.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.2.1",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.2.1.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.8",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.2.17",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.17.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.4.11",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.11.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.5.12",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.12.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.9.5",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.5.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.7.9",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.9.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.2.16",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.16.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.4",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.7.8",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.8.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.5",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.5.9",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.9.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.6",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.9.22",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.22.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.8.22",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.22.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.1.13",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.13.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.9.23",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.23.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.1",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.8.7",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.7.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.0.18",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.18.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.2",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.0",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.4.10",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.10.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.1.1",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.1.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.8.6",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.6.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.7.6",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.6.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.3",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.9.3",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.3.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.5.10",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.10.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.8.4",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.4.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.6.10",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.10.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.9.20",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.20.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.9.4",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.4.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.8",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.2.15",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.15.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.7",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.0.17",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.17.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.0.4",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.4.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.3.13",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.13.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.1.2",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.1.2.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.0.1",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.1.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.9.2",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.9.2.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.3.12",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.12.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.0.19",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.19.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.1.15",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.15.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "5.8.5",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.5.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "6.0.3",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.0.3.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.6.26",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.6.26.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.8.19",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.8.19.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.1",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.1.php",
                     "type": "file"
                 }
             },
@@ -491,17 +635,17 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.7.7",
+                "version": "4.3",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.7.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.3.php",
                     "type": "file"
                 }
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.1.14",
+                "version": "4.6",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.14.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.6.php",
                     "type": "file"
                 }
             },
@@ -531,14 +675,6 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.2.17",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.17.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
                 "version": "4.1.36",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.1.36.php",
@@ -555,17 +691,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.4.11",
+                "version": "4.4.30",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.11.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.2.16",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.16.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.4.30.php",
                     "type": "file"
                 }
             },
@@ -595,30 +723,6 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.7.8",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.8.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.5.9",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.9.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.9.22",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.22.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
                 "version": "4.6.23",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.6.23.php",
@@ -643,9 +747,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.1.13",
+                "version": "4.7.26",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.13.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.7.26.php",
                     "type": "file"
                 }
             },
@@ -659,33 +763,17 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.0.18",
+                "version": "4.4",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.18.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.4.php",
                     "type": "file"
                 }
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.4.10",
+                "version": "4.3.31",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.4.10.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.8.6",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.6.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.7.6",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.7.6.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.3.31.php",
                     "type": "file"
                 }
             },
@@ -694,22 +782,6 @@
                 "version": "4.2.32",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.2.32.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.5.10",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.5.10.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.8.4",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.4.php",
                     "type": "file"
                 }
             },
@@ -739,41 +811,9 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.6.10",
+                "version": "4.5",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.6.10.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "4.9.20",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.9.20.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.2.15",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.2.15.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.0.17",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.0.17.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.3.13",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.13.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.5.php",
                     "type": "file"
                 }
             },
@@ -803,9 +843,17 @@
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "5.3.12",
+                "version": "4.5.29",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.3.12.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.5.29.php",
+                    "type": "file"
+                }
+            },
+            {
+                "name": "inpsyde/wp-stubs-versions",
+                "version": "4.7",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.7.php",
                     "type": "file"
                 }
             },
@@ -814,22 +862,6 @@
                 "version": "4.7.25",
                 "dist": {
                     "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/4.7.25.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.1.15",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.1.15.php",
-                    "type": "file"
-                }
-            },
-            {
-                "name": "inpsyde/wp-stubs-versions",
-                "version": "5.8.5",
-                "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/5.8.5.php",
                     "type": "file"
                 }
             }
