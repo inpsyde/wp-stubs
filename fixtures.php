@@ -46,7 +46,7 @@ $fixtures['$global']['functions']['wp_send_json_success'] = <<<'PHP'
  * @param int $options
  * @psalm-return never
 */
-function wp_send_json_success( $data = null, $status_code = null, $options = 0 ) {};
+function wp_send_json_success($data = null, $status_code = null, $options = 0) {};
 PHP;
 
 $fixtures['$global']['functions']['wp_send_json_error'] = <<<'PHP'
@@ -56,7 +56,7 @@ $fixtures['$global']['functions']['wp_send_json_error'] = <<<'PHP'
  * @param int $options
  * @psalm-return never
 */
-function wp_send_json_error( $data = null, $status_code = null, $options = 0 ) {};
+function wp_send_json_error($data = null, $status_code = null, $options = 0) {};
 PHP;
 
 $fixtures['$global']['functions']['is_wp_error'] = <<<'PHP'
@@ -65,7 +65,7 @@ $fixtures['$global']['functions']['is_wp_error'] = <<<'PHP'
  * @return bool
  * @psalm-assert-if-true \WP_Error $thing
 */
-function is_wp_error( $thing ) {};
+function is_wp_error($thing) {};
 PHP;
 
 return $fixtures;
