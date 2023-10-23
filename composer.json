@@ -29,5 +29,8 @@
     "minimum-stability": "dev",
     "extra": {
         "installer-disable": true
+    },
+    "branch-alias": {
+       "dev-main": "1.0.x-dev"
     }
 }
