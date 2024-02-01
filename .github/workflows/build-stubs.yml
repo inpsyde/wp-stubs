@@ -13,11 +13,17 @@ jobs:
     build-stubs:
         runs-on: ubuntu-latest
         steps:
+
+            -   name: Setup SSH
+                uses: webfactory/ssh-agent@v0.8.0
+                with:
+                    ssh-private-key: ${{ secrets.DEPLOYBOT_SSH_PRIVATE_KEY }}
+                  
             -   name: Checkout
                 uses: actions/checkout@v4
                 with:
                     fetch-depth: 0
-                    token: ${{ secrets.DEPLOYBOT_REPO_READ_WRITE_TOKEN }}
+                    ssh-key: ${{ secrets.DEPLOYBOT_SSH_PRIVATE_KEY }}
 
             -   name: Set up PHP
                 uses: shivammathur/setup-php@v2
