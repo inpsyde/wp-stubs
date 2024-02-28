@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Inpsyde\WpStubs;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Function_;
 use PhpParser\Node\Stmt\Interface_;
 
@@ -32,6 +35,25 @@ class NodeVisitor extends \StubsGenerator\NodeVisitor
 
     /**
      * @param Node $node
+     * @return int|void|null
+     */
+    public function enterNode(Node $node)
+    {
+        $constants = $this->shouldParseNestedConstants($node)
+            ? $this->parseNestedConstants($node)
+            : [];
+
+        $return = parent::enterNode($node);
+
+        if ($constants) {
+            $node->stmts = array_merge((array) ($node->stmts ?? []), $constants);
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param Node $node
      * @param bool $preserveStack
      * @return array|int|void|null
      */
@@ -42,6 +64,39 @@ class NodeVisitor extends \StubsGenerator\NodeVisitor
         }
 
         return parent::leaveNode($node, $preserveStack);
+    }
+
+    /**
+     * @param Node $node
+     * @return bool
+     */
+    private function shouldParseNestedConstants(Node $node): bool
+    {
+        return ($node instanceof Function_);
+    }
+
+    /**
+     * @param Node $node
+     * @return Node[]
+     */
+    private function parseNestedConstants(Node $node): array
+    {
+        $constants = [];
+
+        if (
+            $node instanceof Expression &&
+            $node->expr instanceof FuncCall &&
+            $node->expr->name instanceof Name &&
+            $node->expr->name->parts[0] === 'define'
+        ) {
+            $constants[] = $node;
+        }
+
+        foreach ((array) ($node->stmts ?? []) as $subNode) {
+            $constants = array_merge($constants, $this->parseNestedConstants($subNode));
+        }
+
+        return $constants;
     }
 
     /**
