@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Inpsyde\WpStubs;
 
-use StubsGenerator\StubsGenerator;
-use Symfony\Component\Finder\Finder;
-
 const WP_STUBS_DIR = __DIR__;
 
 try {
@@ -33,15 +30,6 @@ try {
 
     $success = 0;
     $stubsDir = str_replace('\\', '/', WP_STUBS_DIR . '/stubs');
-    $generator = new StubsGenerator(
-        StubsGenerator::FUNCTIONS
-        | StubsGenerator::CLASSES
-        | StubsGenerator::TRAITS
-        | StubsGenerator::INTERFACES
-        | StubsGenerator::CONSTANTS
-    );
-    $fixtures = buildFixtures(require WP_STUBS_DIR . '/fixtures.php');
-    $visitor = NodeVisitor::new($fixtures);
     $latestDone = false;
     $shortDone = [];
 
@@ -56,7 +44,7 @@ try {
             }
 
             fwrite(STDOUT, "\nGenerating stubs for WP '{$fullVer}'...");
-            $output = $generator->generate(buildFinder($wpPath), $visitor)->prettyPrint();
+            $output = generateForWpPath($wpPath);
 
             writeOutput($output, "{$stubsDir}/{$fullVer}.php", $fullVer)
                 ? $success++

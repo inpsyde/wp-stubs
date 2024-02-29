@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Inpsyde\WpStubs;
 
 use PhpParser\ParserFactory;
+use StubsGenerator\Result;
+use StubsGenerator\StubsGenerator;
 use Symfony\Component\Finder\Finder;
 
 const EXCLUDED_WP_DIRS = [
@@ -65,6 +67,25 @@ function buildFixtures(array $fixturesData): array
     }
 
     return $fixtures;
+}
+
+/**
+ * @param string $wpPath
+ * @return string
+ */
+function generateForWpPath(string $wpPath): string
+{
+    $generator = new StubsGenerator(
+        StubsGenerator::FUNCTIONS
+        | StubsGenerator::CLASSES
+        | StubsGenerator::TRAITS
+        | StubsGenerator::INTERFACES
+        | StubsGenerator::CONSTANTS
+    );
+    $fixtures = buildFixtures(require WP_STUBS_DIR . '/fixtures.php');
+    $visitor = NodeVisitor::new($fixtures);
+
+    return $generator->generate(buildFinder($wpPath), $visitor)->prettyPrint();
 }
 
 /**
