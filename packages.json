@@ -3,17 +3,17 @@
         "inpsyde/wp-stubs-versions": [
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "6.4",
+                "version": "dev-latest",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.4.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/latest.php",
                     "type": "file"
                 }
             },
             {
                 "name": "inpsyde/wp-stubs-versions",
-                "version": "dev-latest",
+                "version": "6.4",
                 "dist": {
-                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/latest.php",
+                    "url": "https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/6.4.php",
                     "type": "file"
                 }
             },

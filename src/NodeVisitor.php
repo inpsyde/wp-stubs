@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Function_;
 use PhpParser\Node\Stmt\Interface_;
@@ -72,7 +73,7 @@ class NodeVisitor extends \StubsGenerator\NodeVisitor
      */
     private function shouldParseNestedConstants(Node $node): bool
     {
-        return ($node instanceof Function_);
+        return ($node instanceof Function_ || $node instanceof ClassMethod);
     }
 
     /**
