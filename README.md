@@ -104,6 +104,4 @@ no minimum requirements besides [being able to run WordPress](https://wordpress.
 
 ## License
 
-Copyright (c) 2022, Inpsyde GmbH
-
-This software is released under the ["MIT"](LICENSE) license.
+This repository is a free software, and is released under the terms of the MIT license. See [LICENSE](./LICENSE) for complete license.
