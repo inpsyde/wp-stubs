@@ -29,13 +29,24 @@ $fixtures['$global']['functions']['do_action'] = <<<'PHP'
 function do_action($hook_name, ...$args) {};
 PHP;
 
+$fixtures['$global']['functions']['wp_die'] = <<<'PHP'
+/**
+ * @template T
+ * @param string|WP_Error $message
+ * @param string|int $title
+ * @param string|array{exit?: T}|int $args
+ * @psalm-return (T is null|true ? never : void)
+ */
+function wp_die($message = '', $title = '', $args = []) {};
+PHP;
+
 $fixtures['$global']['functions']['wp_send_json'] = <<<'PHP'
 /**
  * @param mixed $response
  * @param int|null $status_code
  * @param int $options
  * @psalm-return never
-*/
+ */
 function wp_send_json($response, $status_code = null, $options = 0) {};
 PHP;
 
@@ -45,7 +56,7 @@ $fixtures['$global']['functions']['wp_send_json_success'] = <<<'PHP'
  * @param int|null $status_code
  * @param int $options
  * @psalm-return never
-*/
+ */
 function wp_send_json_success($data = null, $status_code = null, $options = 0) {};
 PHP;
 
@@ -55,7 +66,7 @@ $fixtures['$global']['functions']['wp_send_json_error'] = <<<'PHP'
  * @param int|null $status_code
  * @param int $options
  * @psalm-return never
-*/
+ */
 function wp_send_json_error($data = null, $status_code = null, $options = 0) {};
 PHP;
 
@@ -64,7 +75,7 @@ $fixtures['$global']['functions']['is_wp_error'] = <<<'PHP'
  * @param mixed $thing
  * @return bool
  * @psalm-assert-if-true \WP_Error $thing
-*/
+ */
 function is_wp_error($thing) {};
 PHP;
 
