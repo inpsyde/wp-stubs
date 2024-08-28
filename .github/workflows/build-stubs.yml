@@ -44,5 +44,12 @@ jobs:
                     git config --add safe.directory "${GITHUB_WORKSPACE}"
                     git add ./stubs/*
                     git add ./packages.json
-                    git commit -m "Update WordPress stubs" || echo 'Nothing to commit'
+                    git commit -m "Update WordPress stubs" || ((echo "NO_CHANGES=yes" >> $GITHUB_ENV) && (echo "No changes to commit"))
+
+            -   name: Update reference and push
+                if: ${{ env.NO_CHANGES != 'yes' }}
+                run: |
+                    php update_reference.php "$(git rev-parse HEAD)"
+                    git add ./packages.json
+                    git commit -m "Update packages.json references"
                     git push
