@@ -136,8 +136,8 @@ function buildComposerRepo(string $targetDir, string $reference = 'main'): bool
     $finder = Finder::create()->in("{$targetDir}/stubs")
         ->files()
         ->name('*.php')
-        ->sortByModifiedTime()
-        ->reverseSorting();
+        ->sort(\Closure::fromCallable(__NAMESPACE__ . '\\sortByVersionDesc'));
+
     $basePackage = [
         'name' => VERSIONED_PACKAGE_NAME,
         'version' => '',
@@ -156,6 +156,21 @@ function buildComposerRepo(string $targetDir, string $reference = 'main'): bool
     }
 
     return writeComposerRepo($data, "{$targetDir}/packages.json");
+}
+
+function sortByVersionDesc(\SplFileInfo $a, \SplFileInfo $b): int
+{
+    $aBaseName = $a->getBasename('.php');
+    if ($aBaseName === 'latest') {
+        return -1;
+    }
+
+    $bBaseName = $b->getBasename('.php');
+    if ($bBaseName === 'latest') {
+        return 1;
+    }
+
+    return version_compare($bBaseName, $aBaseName);
 }
 
 /**
