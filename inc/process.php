@@ -127,33 +127,50 @@ function writeOutput(string $output, string $targetPath, string $version): bool
 
 /**
  * @param string $targetDir
+ * @param string $reference
  * @return bool
  */
-function buildComposerRepo(string $targetDir): bool
+function buildComposerRepo(string $targetDir, string $reference = 'main'): bool
 {
     $data = ['packages' => [VERSIONED_PACKAGE_NAME => []]];
     $finder = Finder::create()->in("{$targetDir}/stubs")
         ->files()
         ->name('*.php')
-        ->sortByModifiedTime()
-        ->reverseSorting();
+        ->sort(\Closure::fromCallable(__NAMESPACE__ . '\\sortByVersionDesc'));
+
     $basePackage = [
         'name' => VERSIONED_PACKAGE_NAME,
         'version' => '',
         'dist' => [
-            'url' => 'https://raw.githubusercontent.com/inpsyde/wp-stubs/main/stubs/%s.php',
+            'url' => 'https://raw.githubusercontent.com/inpsyde/wp-stubs/%s/stubs/%s.php',
             'type' => 'file',
+            'reference' => $reference,
         ],
     ];
     foreach ($finder as $file) {
         $basename = $file->getBasename('.php');
         $package = $basePackage;
         $package['version'] = ($basename === 'latest') ? 'dev-latest' : $basename;
-        $package['dist']['url'] = sprintf($package['dist']['url'], $basename);
+        $package['dist']['url'] = sprintf($package['dist']['url'], $reference, $basename);
         $data['packages'][VERSIONED_PACKAGE_NAME][] = $package;
     }
 
     return writeComposerRepo($data, "{$targetDir}/packages.json");
+}
+
+function sortByVersionDesc(\SplFileInfo $a, \SplFileInfo $b): int
+{
+    $aBaseName = $a->getBasename('.php');
+    if ($aBaseName === 'latest') {
+        return -1;
+    }
+
+    $bBaseName = $b->getBasename('.php');
+    if ($bBaseName === 'latest') {
+        return 1;
+    }
+
+    return version_compare($bBaseName, $aBaseName);
 }
 
 /**
