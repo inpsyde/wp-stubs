@@ -79,4 +79,26 @@ $fixtures['$global']['functions']['is_wp_error'] = <<<'PHP'
 function is_wp_error($thing) {};
 PHP;
 
+$fixtures['$global']['functions']['get_post_types'] = <<<'PHP'
+/**
+ * @template T of 'names'|'objects'
+ * @param array $args
+ * @param T $output
+ * @param string $operator
+ * @return (T is 'names' ? array<string> : array<\WP_Post_Type>)
+ */
+function get_post_types($args = array(), $output = 'names', $operator = 'and') {};
+PHP;
+
+$fixtures['$global']['functions']['get_taxonomies'] = <<<'PHP'
+/**
+ * @template T of 'names'|'objects'
+ * @param array $args
+ * @param T $output
+ * @param string $operator
+ * @return (T is 'names' ? array<string> : array<\WP_Taxonomy>)
+ */
+function get_taxonomies( $args = array(), $output = 'names', $operator = 'and' ) {};
+PHP;
+
 return $fixtures;
