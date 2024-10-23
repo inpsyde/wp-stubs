@@ -4,6 +4,11 @@ on:
     schedule:
       - cron: '0 0 * * *'
     workflow_dispatch:
+    push:
+        branches:
+            - main
+        paths:
+            - 'fixtures.php'
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
