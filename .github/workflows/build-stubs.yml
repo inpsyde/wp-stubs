@@ -17,10 +17,11 @@ concurrency:
 jobs:
     build-stubs:
         runs-on: ubuntu-latest
+        timeout-minutes: 5
         steps:
 
             -   name: Setup SSH
-                uses: webfactory/ssh-agent@v0.8.0
+                uses: webfactory/ssh-agent@v0.9.0
                 with:
                     ssh-private-key: ${{ secrets.DEPLOYBOT_SSH_PRIVATE_KEY }}
                   
@@ -37,7 +38,7 @@ jobs:
                     coverage: none
 
             -   name: Install dependencies
-                uses: ramsey/composer-install@v2
+                uses: ramsey/composer-install@v3
 
             -   name: Generate stubs
                 run: php generate.php
