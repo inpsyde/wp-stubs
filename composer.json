@@ -4,9 +4,9 @@
     "type": "project",
     "authors": [
         {
-            "name": "Inpsyde GmbH",
+            "name": "Syde GmbH",
             "role": "company",
-            "email": "hello@inpsyde.com"
+            "email": "hello@syde.com"
         }
     ],
     "require-dev": {
