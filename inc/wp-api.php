@@ -24,7 +24,7 @@ function retrieveDownloadUrls(int $versionLimit = 5): array
     $toDownload = [];
     $errors = 0;
     $stubsDir = str_replace('\\', '/', WP_STUBS_DIR . '/stubs');
-    $urlRxp = '{^https://downloads\.wordpress\.org/release/wordpress-([0-9\.]+)-no-content\.zip$}';
+    $urlRxp = '{^https://downloads\.w(?:ordpress)?\.org/release/wordpress-([0-9\.]+)-no-content\.zip$}';
     $versions = [];
     foreach ($versionsData['offers'] as $versionData) {
         $packages = $versionData['packages'] ?? null;
