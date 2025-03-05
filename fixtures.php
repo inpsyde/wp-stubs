@@ -101,4 +101,21 @@ $fixtures['$global']['functions']['get_taxonomies'] = <<<'PHP'
 function get_taxonomies( $args = array(), $output = 'names', $operator = 'and' ) {};
 PHP;
 
+$fixtures['$global']['functions']['esc_sql'] = <<<'PHP'
+/**
+ * @param string|array $data
+ * @return ($data is string ? string : array)
+ */
+function esc_sql( $data ) {};
+PHP;
+
+$fixtures['$global']['functions']['wp_parse_url'] = <<<'PHP'
+/**
+ * @param string $url
+ * @param int $component
+ * @return ($component is -1 ? false|array<string|int> : false|null|string|int)
+ */
+function wp_parse_url( $url, $component = -1 ) {};
+PHP;
+
 return $fixtures;
