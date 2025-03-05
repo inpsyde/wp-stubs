@@ -12,9 +12,11 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Function_;
 use PhpParser\Node\Stmt\Interface_;
+use PhpParser\Node\Stmt\Namespace_;
 
 class NodeVisitor extends \StubsGenerator\NodeVisitor
 {
+    private array $constants = [];
     private array $fixtures;
 
     /**
@@ -40,17 +42,16 @@ class NodeVisitor extends \StubsGenerator\NodeVisitor
      */
     public function enterNode(Node $node)
     {
-        $constants = $this->shouldParseNestedConstants($node)
-            ? $this->parseNestedConstants($node)
-            : [];
-
-        $return = parent::enterNode($node);
-
-        if ($constants) {
-            $node->stmts = array_merge((array) ($node->stmts ?? []), $constants);
+        if ($this->shouldParseNestedConstants($node)) {
+            foreach ($this->parseNestedConstants($node) as $constant) {
+                $constantName = $constant->expr->args[0]->value->value ?? '';
+                if ($constantName && empty($this->constants[$constantName])) {
+                    $this->constants[$constantName] = $constant;
+                }
+            }
         }
 
-        return $return;
+        return parent::enterNode($node);
     }
 
     /**
@@ -65,6 +66,17 @@ class NodeVisitor extends \StubsGenerator\NodeVisitor
         }
 
         return parent::leaveNode($node, $preserveStack);
+    }
+
+    /**
+     * @return Node[]
+     */
+    public function getStubStmts(): array
+    {
+        return array_merge(
+            parent::getStubStmts(),
+            $this->constants ? [new Namespace_(null, array_values($this->constants))] : [],
+        );
     }
 
     /**
