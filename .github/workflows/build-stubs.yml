@@ -4,11 +4,18 @@ on:
     schedule:
       - cron: '0 0 * * *'
     workflow_dispatch:
+        inputs:
+            CLEAN_STUBS:
+                description: Clean existing stubs
+                type: boolean
     push:
         branches:
             - main
         paths:
-            - 'fixtures.php'
+            - '.github/workflows/build-stubs.yml'
+            - '**.php'
+            - 'composer.*'
+            - '!stubs/**'
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
@@ -39,6 +46,10 @@ jobs:
 
             -   name: Install dependencies
                 uses: ramsey/composer-install@v3
+
+            -   name: Clean existing stubs?
+                if: ${{ inputs.CLEAN_STUBS }}
+                run: rm stubs/*
 
             -   name: Generate stubs
                 run: php generate.php
